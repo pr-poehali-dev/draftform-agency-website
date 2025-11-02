@@ -276,7 +276,7 @@ export default function Index() {
           <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {[
               { name: 'МИХАИЛ.М.М', role: 'Директор АГ,ДФ', emoji: '👨‍💼' },
-              { name: 'Ронн.', role: 'ДИЗАЙНЕР', emoji: '👩‍🎨' },
+              { name: 'Огнедышащей дракон...', role: 'ДИЗАЙНЕР', emoji: '👩‍🎨' },
               { name: 'ИВАН', role: 'DEVELOPER', emoji: '👨‍💻' },
               { name: 'АННА', role: 'МЕНЕДЖЕР', emoji: '👩‍💼' }
             ].map((member, i) => (
