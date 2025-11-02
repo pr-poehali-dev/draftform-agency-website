@@ -277,7 +277,6 @@ export default function Index() {
             {[
               { name: 'МИХАИЛ.М.М', role: 'Директор АГ,ДФ', emoji: '👨‍💼' },
               { name: 'Огнедышащей дракон...', role: 'помощник.Генерал', emoji: '👩‍🎨' },
-              { name: 'ИВАН', role: 'DEVELOPER', emoji: '👨‍💻' },
               { name: 'АННА', role: 'МЕНЕДЖЕР', emoji: '👩‍💼' }
             ].map((member, i) => (
               <Card key={i} className="border-4 border-primary bg-background text-center hover:scale-105 transition-transform">
