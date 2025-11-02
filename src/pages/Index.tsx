@@ -282,7 +282,17 @@ export default function Index() {
             ].map((member, i) => (
               <Card key={i} className="border-4 border-primary bg-background text-center hover:scale-105 transition-transform">
                 <CardContent className="pt-6">
-                  <div className="text-6xl mb-4">{member.emoji}</div>
+                  <div className="mb-4">
+                    {member.emoji === '👨‍💼' ? (
+                      <img 
+                        src="https://cdn.poehali.dev/files/eea02a94-b3d5-42d6-a793-054991dbfd68.jpg" 
+                        alt={member.name}
+                        className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-primary"
+                      />
+                    ) : (
+                      <span className="text-6xl">{member.emoji}</span>
+                    )}
+                  </div>
                   <h4 className="text-xl font-bold text-primary mb-2">{member.name}</h4>
                   <p className="text-secondary text-lg">{member.role}</p>
                 </CardContent>
