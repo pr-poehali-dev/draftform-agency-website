@@ -275,7 +275,7 @@ export default function Index() {
           <h3 className="text-2xl md:text-4xl mb-12 text-center text-primary">НАША КОМАНДА</h3>
           <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {[
-              { name: 'МИХАИЛ.М.М', role: 'Директор АГ,ДФ', emoji: '👨‍💼' },
+              { name: 'МИХАИЛ.М.М', role: 'Директор АГ,ДФ создатель АГ.ДФ', emoji: '👨‍💼' },
               { name: 'Огнедышащей дракон...', role: 'помощник.Генерал', emoji: '👩‍🎨' }
             ].map((member, i) => (
               <Card key={i} className="border-4 border-primary bg-background text-center hover:scale-105 transition-transform">
