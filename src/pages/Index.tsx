@@ -275,7 +275,7 @@ export default function Index() {
           <h3 className="text-2xl md:text-4xl mb-12 text-center text-primary">НАША КОМАНДА</h3>
           <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {[
-              { name: 'АЛЕКС', role: 'CEO', emoji: '👨‍💼' },
+              { name: 'МИХАИЛ.М.М', role: 'CEO', emoji: '👨‍💼' },
               { name: 'МАРИЯ', role: 'ДИЗАЙНЕР', emoji: '👩‍🎨' },
               { name: 'ИВАН', role: 'DEVELOPER', emoji: '👨‍💻' },
               { name: 'АННА', role: 'МЕНЕДЖЕР', emoji: '👩‍💼' }
