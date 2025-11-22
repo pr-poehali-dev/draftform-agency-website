@@ -45,7 +45,7 @@ export default function Index() {
               className="w-12 h-12 pixelated"
               style={{ imageRendering: 'pixelated' }}
             />
-            <h1 className="text-xl md:text-2xl text-primary">ДРАФОРМАЦИЯ</h1>
+            <h1 className="text-xl md:text-2xl text-primary">АГЕНТСТВО ДРАФОРМАЦИЯ</h1>
           </div>
           <Button className="bg-secondary hover:bg-secondary/90 text-white font-bold">
             ВОЙТИ
