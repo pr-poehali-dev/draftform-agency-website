@@ -47,9 +47,12 @@ export default function Index() {
             />
             <h1 className="text-xl md:text-2xl text-primary">АГЕНТСТВО ДРАФОРМАЦИЯ</h1>
           </div>
-          <Button className="bg-secondary hover:bg-secondary/90 text-white font-bold">
-            ВОЙТИ
-          </Button>
+          <a href="https://vk.com/draformation.agency" target="_blank" rel="noopener noreferrer">
+            <Button className="bg-secondary hover:bg-secondary/90 text-white font-bold flex items-center gap-2">
+              <Icon name="Share2" size={20} />
+              VK
+            </Button>
+          </a>
         </div>
       </nav>
 
