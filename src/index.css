@@ -6,44 +6,44 @@
 
 @layer base {
   :root {
-    --background: 25 95% 8%;
-    --foreground: 39 100% 95%;
+    --background: 210 100% 97%;
+    --foreground: 210 50% 15%;
 
-    --card: 280 70% 15%;
-    --card-foreground: 39 100% 95%;
+    --card: 200 100% 98%;
+    --card-foreground: 210 50% 15%;
 
-    --popover: 280 70% 15%;
-    --popover-foreground: 39 100% 95%;
+    --popover: 200 100% 98%;
+    --popover-foreground: 210 50% 15%;
 
-    --primary: 25 100% 50%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 200 90% 50%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 280 100% 40%;
-    --secondary-foreground: 39 100% 95%;
+    --secondary: 190 80% 45%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 280 40% 25%;
-    --muted-foreground: 39 80% 70%;
+    --muted: 210 30% 90%;
+    --muted-foreground: 210 30% 40%;
 
-    --accent: 25 100% 50%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 200 90% 50%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 100% 40%;
-    --destructive-foreground: 39 100% 95%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 25 100% 50%;
-    --input: 280 50% 20%;
-    --ring: 25 100% 50%;
+    --border: 200 90% 50%;
+    --input: 210 40% 95%;
+    --ring: 200 90% 50%;
 
     --radius: 0rem;
 
-    --sidebar-background: 25 95% 8%;
-    --sidebar-foreground: 39 100% 95%;
-    --sidebar-primary: 25 100% 50%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 280 70% 15%;
-    --sidebar-accent-foreground: 39 100% 95%;
-    --sidebar-border: 25 100% 50%;
-    --sidebar-ring: 25 100% 50%;
+    --sidebar-background: 210 100% 97%;
+    --sidebar-foreground: 210 50% 15%;
+    --sidebar-primary: 200 90% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 200 100% 98%;
+    --sidebar-accent-foreground: 210 50% 15%;
+    --sidebar-border: 200 90% 50%;
+    --sidebar-ring: 200 90% 50%;
   }
 }
 
@@ -67,30 +67,44 @@
   }
 }
 
-@keyframes float {
-  0%,
+@keyframes snowfall {
+  0% {
+    transform: translateY(-10vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
   100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
+    transform: translateY(110vh) translateX(20px);
+    opacity: 0;
   }
 }
 
-@keyframes float-delay {
-  0%,
+@keyframes snowfall-delay {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
   100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-30px) rotate(10deg);
+    transform: translateY(110vh) translateX(-30px) rotate(360deg);
+    opacity: 0;
   }
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+.animate-snowfall {
+  animation: snowfall 8s linear infinite;
 }
 
-.animate-float-delay {
-  animation: float-delay 4s ease-in-out infinite;
+.animate-snowfall-delay {
+  animation: snowfall-delay 10s linear infinite;
 }

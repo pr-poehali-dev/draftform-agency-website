@@ -23,18 +23,20 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
-      <div className="halloween-bg fixed inset-0 pointer-events-none z-0 opacity-20">
-        <div className="absolute top-10 left-10 text-6xl animate-float">🎃</div>
-        <div className="absolute top-20 right-20 text-5xl animate-float-delay">👻</div>
-        <div className="absolute top-40 left-1/4 text-4xl animate-float">🎃</div>
-        <div className="absolute top-60 right-1/3 text-6xl animate-float-delay">👻</div>
-        <div className="absolute bottom-40 left-1/3 text-5xl animate-float">🎃</div>
-        <div className="absolute bottom-20 right-1/4 text-4xl animate-float-delay">👻</div>
-        <div className="absolute top-1/2 left-10 text-5xl animate-float-delay">🎃</div>
-        <div className="absolute top-3/4 right-10 text-6xl animate-float">👻</div>
+      <div className="winter-bg fixed inset-0 pointer-events-none z-0 opacity-70">
+        <div className="absolute top-10 left-10 text-6xl animate-snowfall">❄️</div>
+        <div className="absolute top-20 right-20 text-5xl animate-snowfall-delay">⛄</div>
+        <div className="absolute top-40 left-1/4 text-4xl animate-snowfall">❄️</div>
+        <div className="absolute top-60 right-1/3 text-6xl animate-snowfall-delay">☃️</div>
+        <div className="absolute bottom-40 left-1/3 text-5xl animate-snowfall">❄️</div>
+        <div className="absolute bottom-20 right-1/4 text-4xl animate-snowfall-delay">⛄</div>
+        <div className="absolute top-1/2 left-10 text-5xl animate-snowfall-delay">❄️</div>
+        <div className="absolute top-3/4 right-10 text-6xl animate-snowfall">☃️</div>
+        <div className="absolute top-1/3 left-1/2 text-5xl animate-snowfall">❄️</div>
+        <div className="absolute bottom-1/3 right-1/2 text-4xl animate-snowfall-delay">❄️</div>
       </div>
       <div className="relative z-10">
-      <nav className="border-b-4 border-primary bg-card sticky top-0 z-50">
+      <nav className="border-b-4 border-primary bg-card sticky top-0 z-50 shadow-lg">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <img 
