@@ -294,7 +294,7 @@ export default function Index() {
                       />
                     ) : member.emoji === '👩‍🎨' ? (
                       <img 
-                        src="https://cdn.poehali.dev/files/22efec58-eb85-4cd7-8fb8-d15c815493be.jpg" 
+                        src="https://cdn.poehali.dev/files/849d95ad-fddc-40b3-b92d-2477f53c931d.png" 
                         alt={member.name}
                         className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-primary"
                       />
