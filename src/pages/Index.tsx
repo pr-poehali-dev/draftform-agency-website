@@ -79,6 +79,10 @@ export default function Index() {
             <Button size="lg" variant="outline" className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-white font-bold text-lg px-8">
               УЗНАТЬ БОЛЬШЕ
             </Button>
+            <Button size="lg" className="bg-accent hover:bg-accent/90 text-white font-bold text-lg px-8 flex items-center gap-2">
+              <Icon name="TrendingUp" size={24} />
+              ИНВЕСТИЦИИ
+            </Button>
           </div>
         </div>
       </section>
