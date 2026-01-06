@@ -384,7 +384,7 @@ export default function Index() {
             {[
               {
                 name: 'СТАРТ',
-                investment: '10 000₽',
+                investment: '100₽',
                 return: '12 000₽',
                 period: '3 месяца',
                 profit: '20%',
