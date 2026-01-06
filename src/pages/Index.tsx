@@ -387,7 +387,7 @@ export default function Index() {
                 investment: '100₽',
                 return: '200₽',
                 period: '3 месяца',
-                profit: '20%',
+                profit: '5%',
                 color: 'primary'
               },
               {
