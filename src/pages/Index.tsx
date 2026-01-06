@@ -385,7 +385,7 @@ export default function Index() {
               {
                 name: 'СТАРТ',
                 investment: '100₽',
-                return: '12 000₽',
+                return: '200₽',
                 period: '3 месяца',
                 profit: '20%',
                 color: 'primary'
