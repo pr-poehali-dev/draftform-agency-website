@@ -81,17 +81,48 @@ export default function Game3D() {
       width: number;
       depth: number;
       height: number;
+      type: 'normal' | 'tower' | 'asian' | 'ruins';
+      roofColor?: string;
     }> = [];
 
-    for (let i = 0; i < 15; i++) {
-      buildings.push({
-        x: (Math.random() - 0.5) * 2000,
-        z: (Math.random() - 0.5) * 2000,
-        width: Math.random() * 80 + 60,
-        depth: Math.random() * 80 + 60,
-        height: Math.random() * 100 + 80
-      });
-    }
+    buildings.push({
+      x: 0,
+      z: 0,
+      width: 40,
+      depth: 40,
+      height: 350,
+      type: 'tower',
+      roofColor: '#8b4513'
+    });
+
+    buildings.push(
+      { x: -200, z: -150, width: 120, depth: 100, height: 80, type: 'asian', roofColor: '#d2691e' },
+      { x: 200, z: -150, width: 100, depth: 90, height: 70, type: 'asian', roofColor: '#cd853f' },
+      { x: -180, z: 180, width: 90, depth: 80, height: 60, type: 'normal', roofColor: '#a0522d' },
+      { x: 180, z: 200, width: 110, depth: 95, height: 75, type: 'normal', roofColor: '#8b4513' },
+      { x: 350, z: 50, width: 80, depth: 70, height: 50, type: 'ruins', roofColor: '#b8860b' },
+      { x: -350, z: 80, width: 85, depth: 75, height: 55, type: 'ruins', roofColor: '#cd853f' },
+      { x: 100, z: 300, width: 70, depth: 65, height: 45, type: 'normal', roofColor: '#a0522d' },
+      { x: -100, z: -300, width: 75, depth: 70, height: 48, type: 'normal', roofColor: '#d2691e' }
+    );
+
+    const stairs: Array<{
+      x: number;
+      z: number;
+      width: number;
+      steps: number;
+    }> = [
+      { x: -100, z: 0, width: 60, steps: 8 },
+      { x: 100, z: 0, width: 60, steps: 8 },
+      { x: 0, z: -100, width: 60, steps: 8 },
+      { x: 0, z: 100, width: 60, steps: 8 }
+    ];
+
+    const plaza = {
+      x: 0,
+      z: 0,
+      size: 200
+    };
 
     const drawPlayer = () => {
       const centerX = canvas.width / 2;
@@ -175,6 +206,33 @@ export default function Game3D() {
       ctx.fill();
     };
 
+    const drawStairs = (stair: typeof stairs[0]) => {
+      const dx = stair.x - playerX;
+      const dz = stair.z - playerZ;
+      const distance = Math.sqrt(dx * dx + dz * dz);
+
+      if (distance > 500) return;
+
+      const angleToStair = Math.atan2(dz, dx);
+      const relativeAngle = angleToStair - playerAngle;
+
+      const screenX = canvas.width / 2 + Math.sin(relativeAngle) * distance * 0.5;
+      const screenY = canvas.height / 2;
+
+      const width = (stair.width / distance) * 300;
+      const stepHeight = 5;
+
+      for (let i = 0; i < stair.steps; i++) {
+        ctx.fillStyle = `rgba(169, 169, 169, ${1 - distance / 500})`;
+        ctx.fillRect(
+          screenX - width / 2,
+          screenY - i * stepHeight - 10,
+          width,
+          stepHeight
+        );
+      }
+    };
+
     const drawBuilding = (building: typeof buildings[0]) => {
       const dx = building.x - playerX;
       const dz = building.z - playerZ;
@@ -188,23 +246,85 @@ export default function Game3D() {
       const screenX = canvas.width / 2 + Math.sin(relativeAngle) * distance * 0.5;
       const screenY = canvas.height / 2 - 50;
 
-      if (screenX < -200 || screenX > canvas.width + 200) return;
+      if (screenX < -300 || screenX > canvas.width + 300) return;
 
-      const size = Math.max(50, 2000 / distance);
       const width = (building.width / distance) * 500;
       const height = (building.height / distance) * 500;
 
-      ctx.fillStyle = '#4a5568';
-      ctx.fillRect(screenX - width / 2, screenY - height, width, height);
+      if (building.type === 'tower') {
+        ctx.fillStyle = '#d3d3d3';
+        ctx.fillRect(screenX - width / 2, screenY - height, width, height);
 
-      ctx.fillStyle = '#2d3748';
-      ctx.fillRect(screenX, screenY - height, width * 0.4, height);
+        ctx.fillStyle = '#a9a9a9';
+        ctx.fillRect(screenX, screenY - height, width * 0.3, height);
 
-      ctx.fillStyle = '#fbbf24';
-      const windowSize = size * 0.15;
-      for (let y = screenY - height + 20; y < screenY - 20; y += windowSize * 2) {
-        for (let x = screenX - width / 2 + 10; x < screenX + width / 2 - 10; x += windowSize * 2) {
-          ctx.fillRect(x, y, windowSize, windowSize);
+        ctx.fillStyle = building.roofColor || '#8b4513';
+        ctx.beginPath();
+        ctx.moveTo(screenX, screenY - height - 30);
+        ctx.lineTo(screenX - width / 2 - 10, screenY - height);
+        ctx.lineTo(screenX + width / 2 + 10, screenY - height);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(screenX - width / 4, screenY - height + 50, width / 2, 30);
+
+        const windowSize = width * 0.15;
+        for (let y = screenY - height + 100; y < screenY - 80; y += windowSize * 3) {
+          ctx.fillStyle = '#87CEEB';
+          ctx.fillRect(screenX - windowSize / 2, y, windowSize, windowSize);
+        }
+      } else if (building.type === 'asian') {
+        ctx.fillStyle = '#f5deb3';
+        ctx.fillRect(screenX - width / 2, screenY - height, width, height);
+
+        ctx.fillStyle = building.roofColor || '#d2691e';
+        ctx.beginPath();
+        ctx.moveTo(screenX, screenY - height - 20);
+        ctx.lineTo(screenX - width / 2 - 15, screenY - height + 10);
+        ctx.lineTo(screenX - width / 2, screenY - height);
+        ctx.lineTo(screenX + width / 2, screenY - height);
+        ctx.lineTo(screenX + width / 2 + 15, screenY - height + 10);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.fillStyle = '#8b4513';
+        const columns = 4;
+        for (let i = 0; i < columns; i++) {
+          const colX = screenX - width / 2 + (width / columns) * i + width / (columns * 2);
+          ctx.fillRect(colX - 2, screenY - height, 4, height);
+        }
+      } else if (building.type === 'ruins') {
+        ctx.fillStyle = '#a9a9a9';
+        ctx.fillRect(screenX - width / 2, screenY - height, width, height * 0.7);
+
+        ctx.fillStyle = '#808080';
+        ctx.fillRect(screenX - width / 3, screenY - height * 0.7, width / 3, height * 0.7);
+
+        ctx.fillStyle = building.roofColor || '#b8860b';
+        ctx.fillRect(screenX - width / 2 - 5, screenY - height * 0.7, width + 10, 8);
+      } else {
+        ctx.fillStyle = '#e8d4b0';
+        ctx.fillRect(screenX - width / 2, screenY - height, width, height);
+
+        ctx.fillStyle = building.roofColor || '#a0522d';
+        ctx.beginPath();
+        ctx.moveTo(screenX - width / 2 - 5, screenY - height);
+        ctx.lineTo(screenX, screenY - height - 15);
+        ctx.lineTo(screenX + width / 2 + 5, screenY - height);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.fillStyle = '#654321';
+        ctx.fillRect(screenX - width / 3, screenY - height * 0.3, width / 4, height * 0.3);
+
+        const windowSize = width * 0.12;
+        for (let y = screenY - height + 15; y < screenY - height * 0.4; y += windowSize * 2) {
+          for (let x = screenX - width / 2 + 10; x < screenX + width / 2 - 10; x += windowSize * 2) {
+            ctx.fillStyle = '#87CEEB';
+            ctx.fillRect(x, y, windowSize, windowSize * 1.2);
+          }
         }
       }
     };
@@ -248,11 +368,28 @@ export default function Game3D() {
     };
 
     const gameLoop = () => {
-      ctx.fillStyle = '#87CEEB';
+      const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height / 2);
+      skyGradient.addColorStop(0, '#87CEEB');
+      skyGradient.addColorStop(1, '#b0d4e8');
+      ctx.fillStyle = skyGradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = '#90EE90';
+      const groundGradient = ctx.createLinearGradient(0, canvas.height / 2, 0, canvas.height);
+      groundGradient.addColorStop(0, '#8fbc8f');
+      groundGradient.addColorStop(1, '#6b8e23');
+      ctx.fillStyle = groundGradient;
       ctx.fillRect(0, canvas.height / 2, canvas.width, canvas.height / 2);
+
+      const plazaDist = Math.sqrt(playerX * playerX + playerZ * playerZ);
+      if (plazaDist < plaza.size * 2) {
+        ctx.fillStyle = '#d3d3d3';
+        ctx.fillRect(
+          canvas.width / 2 - plaza.size,
+          canvas.height / 2 - 20,
+          plaza.size * 2,
+          40
+        );
+      }
 
       const speed = 5;
       if (keys['w'] || keys['W']) {
@@ -273,6 +410,7 @@ export default function Game3D() {
       }
 
       buildings.forEach(drawBuilding);
+      stairs.forEach(drawStairs);
       trees.forEach(drawTree);
 
       bullets.forEach((bullet, index) => {
