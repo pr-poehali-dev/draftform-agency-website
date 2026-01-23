@@ -13,12 +13,13 @@ export default function EarningGroupsTabs() {
       <div className="container mx-auto">
         <h3 className="text-2xl md:text-4xl mb-12 text-center text-primary">ГРУППЫ ЗАРАБОТКА</h3>
         <Tabs defaultValue="beginner" className="max-w-4xl mx-auto">
-          <TabsList className="grid w-full grid-cols-5 bg-background border-4 border-primary">
+          <TabsList className="grid w-full grid-cols-6 bg-background border-4 border-primary">
             <TabsTrigger value="beginner" className="text-lg font-bold">НОВИЧКИ</TabsTrigger>
             <TabsTrigger value="pro" className="text-lg font-bold">ПРО</TabsTrigger>
             <TabsTrigger value="expert" className="text-lg font-bold">ЭКСПЕРТЫ</TabsTrigger>
             <TabsTrigger value="investments" className="text-lg font-bold">ИНВЕСТИЦИИ</TabsTrigger>
             <TabsTrigger value="games" className="text-lg font-bold">ИГРЫ</TabsTrigger>
+            <TabsTrigger value="game3d" className="text-lg font-bold">3D ИГРА</TabsTrigger>
           </TabsList>
           <TabsContent value="beginner" className="mt-6">
             <Card className="border-4 border-primary bg-background">
@@ -244,6 +245,30 @@ export default function EarningGroupsTabs() {
                 </Card>
               ))}
             </div>
+          </TabsContent>
+          <TabsContent value="game3d" className="mt-6">
+            <Card className="border-4 border-accent bg-background">
+              <CardContent className="pt-6">
+                <div className="text-center space-y-4">
+                  <h3 className="text-3xl font-bold text-accent">🎮 3D ИГРА</h3>
+                  <p className="text-xl text-foreground">Откройте полноценную 3D игру в отдельной вкладке</p>
+                  <Button 
+                    size="lg" 
+                    className="bg-accent hover:bg-accent/90 text-white font-bold text-2xl px-16 py-8"
+                    onClick={() => {
+                      window.open('/game3d', '_blank');
+                      toast({
+                        title: "Открываем 3D игру! 🎮",
+                        description: "Игра откроется в новой вкладке...",
+                      });
+                    }}
+                  >
+                    <Icon name="Gamepad2" size={32} className="mr-3" />
+                    ИГРАТЬ В 3D
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
       </div>
