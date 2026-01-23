@@ -56,13 +56,12 @@ export default function Game3D() {
     <div ref={containerRef} className="w-full flex flex-col items-center space-y-4 relative bg-black p-4 rounded-lg">
       {!gameStarted && !gameOver && (
         <div className="text-center space-y-4 py-12">
-          <h3 className="text-4xl font-bold text-accent">🔫 BATTLE ROYALE 🔫</h3>
-          <p className="text-xl text-white">Королевская битва как в Free Fire!</p>
+          <h3 className="text-4xl font-bold text-accent">🌿 ПРОГУЛКА ПО ЛУГУ 🌿</h3>
+          <p className="text-xl text-white">Исследуй красивый мир природы!</p>
           <div className="space-y-2 text-white text-lg">
             <p>⌨️ W A S D - Движение</p>
-            <p>🖱️ Мышь - Прицеливание</p>
-            <p>🔫 Клик - Стрельба</p>
-            <p>🎯 Цель: Уничтожить всех врагов!</p>
+            <p>🖱️ Мышь - Поворот камеры</p>
+            <p>🌱 Наслаждайся природой</p>
           </div>
           <Button 
             size="lg" 
@@ -70,25 +69,12 @@ export default function Game3D() {
             onClick={startGame}
           >
             <Icon name="Play" size={32} className="mr-3" />
-            НАЧАТЬ БИТВУ
+            НАЧАТЬ ПРОГУЛКУ
           </Button>
         </div>
       )}
 
-      {gameOver && (
-        <div className="text-center space-y-4 py-12">
-          <h3 className="text-4xl font-bold text-destructive">💀 ВЫ ПОГИБЛИ 💀</h3>
-          <p className="text-2xl text-accent">Убито врагов: {kills}</p>
-          <Button 
-            size="lg" 
-            className="bg-accent hover:bg-accent/90 text-white font-bold text-2xl px-16 py-8"
-            onClick={startGame}
-          >
-            <Icon name="RotateCcw" size={32} className="mr-3" />
-            ИГРАТЬ СНОВА
-          </Button>
-        </div>
-      )}
+
 
       {gameStarted && (
         <>

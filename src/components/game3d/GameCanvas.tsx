@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import type { Bullet, Enemy, Tree, Building, Stair, Plaza } from './types';
-import { drawPlayer, drawEnemy, drawTree, drawBuilding, drawStairs, drawBullet, drawCrosshair } from './renderers';
+import type { Grass, Cloud } from './types';
+import { drawGrass, drawCloud } from './renderers';
 
 interface GameCanvasProps {
   onKillsChange: (kills: number) => void;
@@ -25,97 +25,57 @@ export default function GameCanvas({ onKillsChange, onHealthChange, onGameOver }
     let playerX = 0;
     let playerZ = 0;
     let playerAngle = 0;
-    let playerHealth = 100;
-    let playerKills = 0;
-    let mouseX = canvas.width / 2;
-    let mouseY = canvas.height / 2;
+    let time = 0;
 
     const keys: { [key: string]: boolean } = {};
 
-    const bullets: Bullet[] = [];
-
-    const enemies: Enemy[] = [];
-
-    for (let i = 0; i < 10; i++) {
-      enemies.push({
-        x: (Math.random() - 0.5) * 2000,
-        z: (Math.random() - 0.5) * 2000,
-        health: 100,
-        angle: Math.random() * Math.PI * 2,
-        state: 'idle',
-        shootCooldown: 0
+    const grasses: Grass[] = [];
+    for (let i = 0; i < 500; i++) {
+      grasses.push({
+        x: (Math.random() - 0.5) * 3000,
+        z: (Math.random() - 0.5) * 3000,
+        type: Math.floor(Math.random() * 5),
+        size: 15 + Math.random() * 20,
+        swayOffset: Math.random() * Math.PI * 2
       });
     }
 
-    const trees: Tree[] = [];
-
-    for (let i = 0; i < 80; i++) {
-      trees.push({
-        x: (Math.random() - 0.5) * 2500,
-        z: (Math.random() - 0.5) * 2500,
-        type: Math.floor(Math.random() * 3)
+    const clouds: Cloud[] = [];
+    for (let i = 0; i < 15; i++) {
+      clouds.push({
+        x: Math.random() * canvas.width * 2,
+        y: Math.random() * 150 + 20,
+        size: 30 + Math.random() * 40,
+        speed: 0.1 + Math.random() * 0.3
       });
     }
-
-    const buildings: Building[] = [];
-
-    buildings.push({
-      x: 0,
-      z: 0,
-      width: 40,
-      depth: 40,
-      height: 350,
-      type: 'tower',
-      roofColor: '#8b4513'
-    });
-
-    buildings.push(
-      { x: -200, z: -150, width: 120, depth: 100, height: 80, type: 'asian', roofColor: '#d2691e' },
-      { x: 200, z: -150, width: 100, depth: 90, height: 70, type: 'asian', roofColor: '#cd853f' },
-      { x: -180, z: 180, width: 90, depth: 80, height: 60, type: 'normal', roofColor: '#a0522d' },
-      { x: 180, z: 200, width: 110, depth: 95, height: 75, type: 'normal', roofColor: '#8b4513' },
-      { x: 350, z: 50, width: 80, depth: 70, height: 50, type: 'ruins', roofColor: '#b8860b' },
-      { x: -350, z: 80, width: 85, depth: 75, height: 55, type: 'ruins', roofColor: '#cd853f' },
-      { x: 100, z: 300, width: 70, depth: 65, height: 45, type: 'normal', roofColor: '#a0522d' },
-      { x: -100, z: -300, width: 75, depth: 70, height: 48, type: 'normal', roofColor: '#d2691e' }
-    );
-
-    const stairs: Stair[] = [
-      { x: -100, z: 0, width: 60, steps: 8 },
-      { x: 100, z: 0, width: 60, steps: 8 },
-      { x: 0, z: -100, width: 60, steps: 8 },
-      { x: 0, z: 100, width: 60, steps: 8 }
-    ];
-
-    const plaza: Plaza = {
-      x: 0,
-      z: 0,
-      size: 200
-    };
 
     const gameLoop = () => {
+      time++;
+
       const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height / 2);
       skyGradient.addColorStop(0, '#87CEEB');
-      skyGradient.addColorStop(1, '#b0d4e8');
+      skyGradient.addColorStop(0.6, '#a8d8f0');
+      skyGradient.addColorStop(1, '#c5e6f7');
       ctx.fillStyle = skyGradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+      clouds.forEach(cloud => {
+        cloud.x += cloud.speed;
+        if (cloud.x > canvas.width + cloud.size * 2) {
+          cloud.x = -cloud.size * 2;
+          cloud.y = Math.random() * 150 + 20;
+        }
+        drawCloud(ctx, cloud);
+      });
+
       const groundGradient = ctx.createLinearGradient(0, canvas.height / 2, 0, canvas.height);
-      groundGradient.addColorStop(0, '#8fbc8f');
-      groundGradient.addColorStop(1, '#6b8e23');
+      groundGradient.addColorStop(0, '#7cb342');
+      groundGradient.addColorStop(0.3, '#689f38');
+      groundGradient.addColorStop(0.6, '#558b2f');
+      groundGradient.addColorStop(1, '#33691e');
       ctx.fillStyle = groundGradient;
       ctx.fillRect(0, canvas.height / 2, canvas.width, canvas.height / 2);
-
-      const plazaDist = Math.sqrt(playerX * playerX + playerZ * playerZ);
-      if (plazaDist < plaza.size * 2) {
-        ctx.fillStyle = '#d3d3d3';
-        ctx.fillRect(
-          canvas.width / 2 - plaza.size,
-          canvas.height / 2 - 20,
-          plaza.size * 2,
-          40
-        );
-      }
 
       const speed = 5;
       if (keys['w'] || keys['W']) {
@@ -135,90 +95,20 @@ export default function GameCanvas({ onKillsChange, onHealthChange, onGameOver }
         playerZ += Math.sin(playerAngle + Math.PI / 2) * speed;
       }
 
-      buildings.forEach(building => drawBuilding(ctx, canvas, building, playerX, playerZ, playerAngle));
-      stairs.forEach(stair => drawStairs(ctx, canvas, stair, playerX, playerZ, playerAngle));
-      trees.forEach(tree => drawTree(ctx, canvas, tree, playerX, playerZ, playerAngle));
-
-      bullets.forEach((bullet, index) => {
-        bullet.x += Math.cos(bullet.angle) * bullet.speed;
-        bullet.z += Math.sin(bullet.angle) * bullet.speed;
-
-        const bulletDist = Math.sqrt(bullet.x * bullet.x + bullet.z * bullet.z);
-        if (bulletDist > 2000) {
-          bullets.splice(index, 1);
-          return;
-        }
-
-        enemies.forEach((enemy, enemyIndex) => {
-          const dx = bullet.x - enemy.x;
-          const dz = bullet.z - enemy.z;
-          const dist = Math.sqrt(dx * dx + dz * dz);
-
-          if (dist < 20) {
-            enemy.health -= 50;
-            bullets.splice(index, 1);
-
-            if (enemy.health <= 0) {
-              enemies.splice(enemyIndex, 1);
-              playerKills++;
-              onKillsChange(playerKills);
-              
-              enemies.push({
-                x: (Math.random() - 0.5) * 2000,
-                z: (Math.random() - 0.5) * 2000,
-                health: 100,
-                angle: Math.random() * Math.PI * 2,
-                state: 'idle',
-                shootCooldown: 0
-              });
-            }
-          }
-        });
-
-        drawBullet(ctx, canvas, bullet, playerX, playerZ, playerAngle);
+      grasses.sort((a, b) => {
+        const distA = Math.sqrt((a.x - playerX) ** 2 + (a.z - playerZ) ** 2);
+        const distB = Math.sqrt((b.x - playerX) ** 2 + (b.z - playerZ) ** 2);
+        return distB - distA;
       });
 
-      enemies.forEach(enemy => {
-        const dx = playerX - enemy.x;
-        const dz = playerZ - enemy.z;
-        const dist = Math.sqrt(dx * dx + dz * dz);
-
-        if (dist < 500) {
-          enemy.state = 'chase';
-          enemy.angle = Math.atan2(dz, dx);
-          enemy.x += Math.cos(enemy.angle) * 2;
-          enemy.z += Math.sin(enemy.angle) * 2;
-
-          if (dist < 300) {
-            enemy.state = 'shoot';
-            enemy.shootCooldown--;
-
-            if (enemy.shootCooldown <= 0) {
-              playerHealth -= 10;
-              onHealthChange(playerHealth);
-              enemy.shootCooldown = 60;
-
-              if (playerHealth <= 0) {
-                onGameOver();
-                return;
-              }
-            }
-          }
-        } else {
-          enemy.state = 'idle';
-        }
-
-        drawEnemy(ctx, canvas, enemy, playerX, playerZ, playerAngle);
+      grasses.forEach(grass => {
+        drawGrass(ctx, canvas, grass, playerX, playerZ, playerAngle, time);
       });
 
-      drawPlayer(ctx, canvas, playerAngle, playerHealth);
-      drawCrosshair(ctx, mouseX, mouseY);
-
-      ctx.fillStyle = '#000';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
       ctx.font = 'bold 24px Arial';
-      ctx.fillText(`💀 УБИЙСТВ: ${playerKills}`, 20, 40);
-      ctx.fillText(`❤️ ЗДОРОВЬЕ: ${playerHealth}`, 20, 75);
-      ctx.fillText(`👥 ВРАГОВ: ${enemies.length}`, 20, 110);
+      ctx.fillText(`🌍 X: ${Math.floor(playerX)} Z: ${Math.floor(playerZ)}`, 20, 40);
+      ctx.fillText(`🧭 Угол: ${Math.floor((playerAngle * 180) / Math.PI)}°`, 20, 75);
 
       animationId = requestAnimationFrame(gameLoop);
     };
@@ -233,27 +123,17 @@ export default function GameCanvas({ onKillsChange, onHealthChange, onGameOver }
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
 
       const dx = mouseX - canvas.width / 2;
       const dy = mouseY - canvas.height / 2;
       playerAngle = Math.atan2(dy, dx) + Math.PI / 2;
     };
 
-    const handleClick = () => {
-      bullets.push({
-        x: playerX,
-        z: playerZ,
-        angle: playerAngle,
-        speed: 15
-      });
-    };
-
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
     canvas.addEventListener('mousemove', handleMouseMove);
-    canvas.addEventListener('click', handleClick);
 
     gameLoop();
 
@@ -262,7 +142,6 @@ export default function GameCanvas({ onKillsChange, onHealthChange, onGameOver }
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
       canvas.removeEventListener('mousemove', handleMouseMove);
-      canvas.removeEventListener('click', handleClick);
     };
   }, [onKillsChange, onHealthChange, onGameOver]);
 
