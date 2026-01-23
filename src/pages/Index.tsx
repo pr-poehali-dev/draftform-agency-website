@@ -316,32 +316,62 @@ export default function Index() {
               </div>
             </TabsContent>
             <TabsContent value="games" className="mt-6">
-              <Card className="border-4 border-accent bg-background">
-                <CardHeader>
-                  <CardTitle className="text-3xl text-accent text-center">🧟 ЗОМБИ МАНИЯ 🧟</CardTitle>
-                  <CardDescription className="text-foreground text-lg text-center">
-                    Культовая игра из Одноклассников
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex flex-col items-center space-y-4">
-                  <div className="w-full max-w-4xl">
-                    <iframe 
-                      src="https://ok.ru/game/zombiemania"
-                      className="w-full h-[600px] border-4 border-accent rounded-lg"
-                      title="Зомби Мания"
-                      allowFullScreen
-                    />
-                  </div>
-                  <div className="text-center space-y-2">
-                    <p className="text-lg text-foreground">🧟 Сражайся с зомби</p>
-                    <p className="text-lg text-foreground">💰 Собирай ресурсы</p>
-                    <p className="text-lg text-foreground">🏆 Стань чемпионом</p>
-                  </div>
-                  <p className="text-sm text-muted-foreground text-center">
-                    * Игра загружается с официального сервера Одноклассников
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="grid md:grid-cols-2 gap-6">
+                {[
+                  {
+                    title: '🧟 ЗОМБИ МАНИЯ',
+                    description: 'Сражайся с полчищами зомби',
+                    url: 'https://ok.ru/game/zombiemania',
+                    emoji: '🧟‍♂️'
+                  },
+                  {
+                    title: '🚜 ФЕРМА СОСЕДИ',
+                    description: 'Создай свою идеальную ферму',
+                    url: 'https://ok.ru/game/farmneighbors',
+                    emoji: '🌾'
+                  },
+                  {
+                    title: '🏝️ КЛОНДАЙК',
+                    description: 'Золотая лихорадка на Аляске',
+                    url: 'https://ok.ru/game/klondike',
+                    emoji: '⛏️'
+                  },
+                  {
+                    title: '🎣 МОЕЙ РЫБКЕ',
+                    description: 'Стань лучшим рыбаком',
+                    url: 'https://ok.ru/game/fishing',
+                    emoji: '🐟'
+                  }
+                ].map((game, i) => (
+                  <Card key={i} className="border-4 border-accent bg-background hover:border-primary transition-colors">
+                    <CardHeader>
+                      <CardTitle className="text-2xl text-accent text-center">{game.title}</CardTitle>
+                      <CardDescription className="text-foreground text-center">
+                        {game.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex flex-col items-center space-y-4">
+                      <div className="w-full aspect-video bg-accent/10 flex items-center justify-center rounded-lg border-4 border-accent/30">
+                        <span className="text-8xl">{game.emoji}</span>
+                      </div>
+                      <Button 
+                        size="lg" 
+                        className="w-full bg-accent hover:bg-accent/90 text-white font-bold text-xl flex items-center justify-center gap-2"
+                        onClick={() => {
+                          window.open(game.url, '_blank', 'width=800,height=600');
+                          toast({
+                            title: `Запуск ${game.title}! 🎮`,
+                            description: "Открываем игру в новом окне...",
+                          });
+                        }}
+                      >
+                        <Icon name="Play" size={24} />
+                        ИГРАТЬ
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </TabsContent>
           </Tabs>
         </div>
