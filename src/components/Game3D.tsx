@@ -1,7 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import Icon from '@/components/ui/icon';
 
 export default function Game3D() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -36,11 +40,68 @@ export default function Game3D() {
       });
     }
 
+    const grass: Array<{
+      x: number;
+      z: number;
+      height: number;
+      sway: number;
+    }> = [];
+
+    for (let i = 0; i < 300; i++) {
+      grass.push({
+        x: Math.random() * canvas.width - canvas.width / 2,
+        z: Math.random() * 1500,
+        height: Math.random() * 30 + 20,
+        sway: Math.random() * Math.PI * 2
+      });
+    }
+
+    const drawGrass = () => {
+      grass.sort((a, b) => b.z - a.z);
+
+      grass.forEach(g => {
+        g.z -= 2;
+        if (g.z < 1) {
+          g.z = 1500;
+          g.x = Math.random() * canvas.width - canvas.width / 2;
+        }
+
+        const scale = 600 / g.z;
+        const x2d = g.x * scale + canvas.width / 2;
+        const y2d = canvas.height * 0.7 + (g.z / 1500) * 100;
+        const height = g.height * scale;
+        const width = 3 * scale;
+
+        const swayOffset = Math.sin(time * 3 + g.sway) * 5 * scale;
+
+        const alpha = 1 - g.z / 1500;
+        ctx.strokeStyle = `hsla(110, 60%, 40%, ${alpha})`;
+        ctx.lineWidth = width;
+        ctx.lineCap = 'round';
+        
+        ctx.beginPath();
+        ctx.moveTo(x2d, y2d);
+        ctx.quadraticCurveTo(
+          x2d + swayOffset / 2, 
+          y2d - height / 2, 
+          x2d + swayOffset, 
+          y2d - height
+        );
+        ctx.stroke();
+      });
+    };
+
     const draw3D = () => {
-      ctx.fillStyle = 'rgba(15, 23, 42, 0.15)';
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, '#0f172a');
+      gradient.addColorStop(0.6, '#1e3a5f');
+      gradient.addColorStop(1, '#2d5016');
+      ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       time += 0.015;
+
+      drawGrass();
 
       particles.forEach(particle => {
         particle.x += particle.vx;
@@ -88,12 +149,43 @@ export default function Game3D() {
     };
   }, []);
 
+  const toggleFullscreen = () => {
+    if (!containerRef.current) return;
+
+    if (!document.fullscreenElement) {
+      containerRef.current.requestFullscreen();
+      setIsFullscreen(true);
+    } else {
+      document.exitFullscreen();
+      setIsFullscreen(false);
+    }
+  };
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
+
   return (
-    <div className="w-full flex justify-center items-center">
+    <div ref={containerRef} className="w-full flex flex-col items-center space-y-4 relative">
       <canvas 
         ref={canvasRef} 
         className="w-full max-w-6xl rounded-lg border-4 border-accent shadow-2xl"
       />
+      <Button
+        onClick={toggleFullscreen}
+        className="bg-accent hover:bg-accent/90 text-white font-bold"
+        size="lg"
+      >
+        <Icon name={isFullscreen ? "Minimize" : "Maximize"} size={20} className="mr-2" />
+        {isFullscreen ? "ВЫЙТИ ИЗ ПОЛНОГО ЭКРАНА" : "НА ВЕСЬ ЭКРАН"}
+      </Button>
     </div>
   );
 }
