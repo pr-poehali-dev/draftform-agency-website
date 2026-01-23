@@ -78,19 +78,51 @@ export const drawGrass = (
       ctx.fill();
     }
   } else if (grass.type === 3) {
-    ctx.strokeStyle = grassColor;
-    ctx.lineWidth = 2;
-    ctx.lineCap = 'round';
-    for (let i = 0; i < 4; i++) {
+    const bladeCount = 15 + Math.floor(Math.random() * 10);
+    const baseColors = ['#2d5016', '#3d6b1a', '#4a7d1e', '#558b2f', '#6aaa30'];
+    
+    for (let i = 0; i < bladeCount; i++) {
+      const bladeAngle = (Math.random() - 0.5) * Math.PI * 0.8;
+      const bladeLength = size * (0.6 + Math.random() * 0.8);
+      const bladeThickness = Math.max(0.5, size * 0.03 * (1 + Math.random() * 0.5));
+      const bladeSway = Math.sin(time * 0.003 + grass.swayOffset + i * 0.5) * (bladeLength * 0.15);
+      
+      ctx.strokeStyle = baseColors[Math.floor(Math.random() * baseColors.length)];
+      ctx.lineWidth = bladeThickness;
+      ctx.lineCap = 'round';
+      
       ctx.beginPath();
-      ctx.moveTo(i * 2 - 3, 0);
+      ctx.moveTo(Math.sin(bladeAngle) * size * 0.1, 0);
+      
       ctx.quadraticCurveTo(
-        i * 2 - 3 + sway * 0.5,
-        -size * 0.5,
-        i * 2 - 3 + sway + Math.sin(time * 0.004 + i) * 3,
-        -size
+        Math.sin(bladeAngle) * size * 0.15 + bladeSway * 0.5,
+        -bladeLength * 0.4,
+        Math.sin(bladeAngle) * size * 0.2 + bladeSway,
+        -bladeLength * 0.7
       );
+      
+      ctx.quadraticCurveTo(
+        Math.sin(bladeAngle) * size * 0.22 + bladeSway * 1.2,
+        -bladeLength * 0.85,
+        Math.sin(bladeAngle) * size * 0.25 + bladeSway * 1.5 + Math.sin(time * 0.005 + i) * 2,
+        -bladeLength
+      );
+      
       ctx.stroke();
+      
+      if (Math.random() > 0.7) {
+        ctx.lineWidth = bladeThickness * 0.7;
+        ctx.beginPath();
+        ctx.moveTo(
+          Math.sin(bladeAngle) * size * 0.2 + bladeSway,
+          -bladeLength * 0.7
+        );
+        ctx.lineTo(
+          Math.sin(bladeAngle + 0.3) * size * 0.15 + bladeSway * 0.8,
+          -bladeLength * 0.85
+        );
+        ctx.stroke();
+      }
     }
   } else {
     ctx.fillStyle = grassColor;
