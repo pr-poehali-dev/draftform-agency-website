@@ -141,10 +141,11 @@ export default function Index() {
         <div className="container mx-auto">
           <h3 className="text-2xl md:text-4xl mb-12 text-center text-primary">ГРУППЫ ЗАРАБОТКА</h3>
           <Tabs defaultValue="beginner" className="max-w-4xl mx-auto">
-            <TabsList className="grid w-full grid-cols-3 bg-background border-4 border-primary">
+            <TabsList className="grid w-full grid-cols-4 bg-background border-4 border-primary">
               <TabsTrigger value="beginner" className="text-lg font-bold">НОВИЧКИ</TabsTrigger>
               <TabsTrigger value="pro" className="text-lg font-bold">ПРО</TabsTrigger>
               <TabsTrigger value="expert" className="text-lg font-bold">ЭКСПЕРТЫ</TabsTrigger>
+              <TabsTrigger value="investments" className="text-lg font-bold">ИНВЕСТИЦИИ</TabsTrigger>
             </TabsList>
             <TabsContent value="beginner" className="mt-6">
               <Card className="border-4 border-primary bg-background">
@@ -226,6 +227,92 @@ export default function Index() {
                   </Button>
                 </CardContent>
               </Card>
+            </TabsContent>
+            <TabsContent value="investments" className="mt-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  {
+                    name: 'СТАРТ',
+                    investment: '100₽',
+                    return: '200₽',
+                    period: '3 месяца',
+                    profit: '5%',
+                    color: 'primary'
+                  },
+                  {
+                    name: 'БАЗОВЫЙ',
+                    investment: '1 000₽',
+                    return: '1 200₽',
+                    period: '3 месяца',
+                    profit: '20%',
+                    color: 'secondary'
+                  },
+                  {
+                    name: 'ПРОДВИНУТЫЙ',
+                    investment: '5 000₽',
+                    return: '7 500₽',
+                    period: '6 месяцев',
+                    profit: '50%',
+                    color: 'primary'
+                  },
+                  {
+                    name: 'ПРОФИ',
+                    investment: '10 000₽',
+                    return: '20 000₽',
+                    period: '6 месяцев',
+                    profit: '100%',
+                    color: 'accent'
+                  },
+                  {
+                    name: 'ЭКСПЕРТ',
+                    investment: '25 000₽',
+                    return: '62 500₽',
+                    period: '12 месяцев',
+                    profit: '150%',
+                    color: 'secondary'
+                  },
+                  {
+                    name: 'VIP',
+                    investment: '50 000₽',
+                    return: '150 000₽',
+                    period: '12 месяцев',
+                    profit: '200%',
+                    color: 'primary'
+                  }
+                ].map((plan, i) => (
+                  <Card key={i} className={`border-4 border-${plan.color} bg-background hover:bg-muted transition-colors`}>
+                    <CardHeader>
+                      <CardTitle className={`text-2xl text-${plan.color}`}>{plan.name}</CardTitle>
+                      <CardDescription className="text-foreground text-lg">
+                        Инвестируйте и получайте прибыль
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="flex justify-between items-center text-lg">
+                        <span className="text-muted-foreground">Вложение:</span>
+                        <span className="font-bold text-foreground">{plan.investment}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-lg">
+                        <span className="text-muted-foreground">Возврат:</span>
+                        <span className={`font-bold text-${plan.color}`}>{plan.return}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-lg">
+                        <span className="text-muted-foreground">Срок:</span>
+                        <span className="font-bold text-foreground">{plan.period}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-lg">
+                        <span className="text-muted-foreground">Доходность:</span>
+                        <Badge className={`bg-${plan.color} text-white text-base px-3 py-1`}>
+                          {plan.profit}
+                        </Badge>
+                      </div>
+                      <Button className={`w-full bg-${plan.color} hover:bg-${plan.color}/90 text-white font-bold text-lg mt-4`}>
+                        ИНВЕСТИРОВАТЬ
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </TabsContent>
           </Tabs>
         </div>
