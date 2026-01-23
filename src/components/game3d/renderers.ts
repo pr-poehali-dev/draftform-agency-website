@@ -173,3 +173,81 @@ export const drawCloud = (
   ctx.arc(cloud.x + cloud.size * 1.2, cloud.y - cloud.size * 0.4, cloud.size * 0.6, 0, Math.PI * 2);
   ctx.fill();
 };
+
+export const drawFirstPersonHands = (
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  walkCycle: number,
+  isMoving: boolean
+) => {
+  const bobAmount = isMoving ? Math.sin(walkCycle * 0.15) * 15 : 0;
+  const swayAmount = isMoving ? Math.cos(walkCycle * 0.1) * 8 : 0;
+
+  ctx.save();
+
+  const leftHandX = canvas.width * 0.15 - swayAmount;
+  const leftHandY = canvas.height * 0.7 + bobAmount;
+  ctx.fillStyle = '#fdd8b5';
+  ctx.beginPath();
+  ctx.ellipse(leftHandX, leftHandY, 60, 80, Math.PI * 0.1, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = '#4a7c59';
+  ctx.beginPath();
+  ctx.ellipse(leftHandX, leftHandY - 100, 55, 90, Math.PI * 0.05, 0, Math.PI * 2);
+  ctx.fill();
+
+  for (let i = 0; i < 4; i++) {
+    ctx.fillStyle = '#f4c2a0';
+    ctx.beginPath();
+    ctx.ellipse(
+      leftHandX - 30 + i * 15,
+      leftHandY + 60,
+      8,
+      25,
+      Math.PI * (0.15 - i * 0.05),
+      0,
+      Math.PI * 2
+    );
+    ctx.fill();
+  }
+
+  ctx.fillStyle = '#f4c2a0';
+  ctx.beginPath();
+  ctx.ellipse(leftHandX - 50, leftHandY + 30, 10, 30, -Math.PI * 0.3, 0, Math.PI * 2);
+  ctx.fill();
+
+  const rightHandX = canvas.width * 0.85 + swayAmount;
+  const rightHandY = canvas.height * 0.7 - bobAmount;
+  ctx.fillStyle = '#fdd8b5';
+  ctx.beginPath();
+  ctx.ellipse(rightHandX, rightHandY, 60, 80, -Math.PI * 0.1, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = '#4a7c59';
+  ctx.beginPath();
+  ctx.ellipse(rightHandX, rightHandY - 100, 55, 90, -Math.PI * 0.05, 0, Math.PI * 2);
+  ctx.fill();
+
+  for (let i = 0; i < 4; i++) {
+    ctx.fillStyle = '#f4c2a0';
+    ctx.beginPath();
+    ctx.ellipse(
+      rightHandX + 30 - i * 15,
+      rightHandY + 60,
+      8,
+      25,
+      -Math.PI * (0.15 - i * 0.05),
+      0,
+      Math.PI * 2
+    );
+    ctx.fill();
+  }
+
+  ctx.fillStyle = '#f4c2a0';
+  ctx.beginPath();
+  ctx.ellipse(rightHandX + 50, rightHandY + 30, 10, 30, Math.PI * 0.3, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.restore();
+};

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import type { Grass, Cloud } from './types';
-import { drawGrass, drawCloud } from './renderers';
+import { drawGrass, drawCloud, drawFirstPersonHands } from './renderers';
 
 interface GameCanvasProps {
   onKillsChange: (kills: number) => void;
@@ -26,6 +26,9 @@ export default function GameCanvas({ onKillsChange, onHealthChange, onGameOver }
     let playerZ = 0;
     let playerAngle = 0;
     let time = 0;
+    const walkCycle = 0;
+    const cameraHeight = 0;
+    const targetCameraHeight = 0;
 
     const keys: { [key: string]: boolean } = {};
 
@@ -78,22 +81,37 @@ export default function GameCanvas({ onKillsChange, onHealthChange, onGameOver }
       ctx.fillRect(0, canvas.height / 2, canvas.width, canvas.height / 2);
 
       const speed = 5;
+      let isMoving = false;
+
       if (keys['w'] || keys['W']) {
         playerX += Math.cos(playerAngle) * speed;
         playerZ += Math.sin(playerAngle) * speed;
+        isMoving = true;
       }
       if (keys['s'] || keys['S']) {
         playerX -= Math.cos(playerAngle) * speed;
         playerZ -= Math.sin(playerAngle) * speed;
+        isMoving = true;
       }
       if (keys['a'] || keys['A']) {
         playerX += Math.cos(playerAngle - Math.PI / 2) * speed;
         playerZ += Math.sin(playerAngle - Math.PI / 2) * speed;
+        isMoving = true;
       }
       if (keys['d'] || keys['D']) {
         playerX += Math.cos(playerAngle + Math.PI / 2) * speed;
         playerZ += Math.sin(playerAngle + Math.PI / 2) * speed;
+        isMoving = true;
       }
+
+      if (isMoving) {
+        walkCycle += 1;
+        targetCameraHeight = Math.sin(walkCycle * 0.15) * 5;
+      } else {
+        targetCameraHeight = 0;
+      }
+
+      cameraHeight += (targetCameraHeight - cameraHeight) * 0.1;
 
       grasses.sort((a, b) => {
         const distA = Math.sqrt((a.x - playerX) ** 2 + (a.z - playerZ) ** 2);
@@ -101,9 +119,16 @@ export default function GameCanvas({ onKillsChange, onHealthChange, onGameOver }
         return distB - distA;
       });
 
+      ctx.save();
+      ctx.translate(0, cameraHeight);
+
       grasses.forEach(grass => {
         drawGrass(ctx, canvas, grass, playerX, playerZ, playerAngle, time);
       });
+
+      ctx.restore();
+
+      drawFirstPersonHands(ctx, canvas, walkCycle, isMoving);
 
       ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
       ctx.font = 'bold 24px Arial';
