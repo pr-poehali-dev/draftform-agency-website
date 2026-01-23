@@ -141,11 +141,12 @@ export default function Index() {
         <div className="container mx-auto">
           <h3 className="text-2xl md:text-4xl mb-12 text-center text-primary">ГРУППЫ ЗАРАБОТКА</h3>
           <Tabs defaultValue="beginner" className="max-w-4xl mx-auto">
-            <TabsList className="grid w-full grid-cols-4 bg-background border-4 border-primary">
+            <TabsList className="grid w-full grid-cols-5 bg-background border-4 border-primary">
               <TabsTrigger value="beginner" className="text-lg font-bold">НОВИЧКИ</TabsTrigger>
               <TabsTrigger value="pro" className="text-lg font-bold">ПРО</TabsTrigger>
               <TabsTrigger value="expert" className="text-lg font-bold">ЭКСПЕРТЫ</TabsTrigger>
               <TabsTrigger value="investments" className="text-lg font-bold">ИНВЕСТИЦИИ</TabsTrigger>
+              <TabsTrigger value="games" className="text-lg font-bold">ИГРЫ</TabsTrigger>
             </TabsList>
             <TabsContent value="beginner" className="mt-6">
               <Card className="border-4 border-primary bg-background">
@@ -313,6 +314,43 @@ export default function Index() {
                   </Card>
                 ))}
               </div>
+            </TabsContent>
+            <TabsContent value="games" className="mt-6">
+              <Card className="border-4 border-accent bg-background">
+                <CardHeader>
+                  <CardTitle className="text-3xl text-accent text-center">FREE FIRE</CardTitle>
+                  <CardDescription className="text-foreground text-lg text-center">
+                    Запустите легендарную королевскую битву
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="flex flex-col items-center space-y-6">
+                  <div className="w-48 h-48 bg-accent/20 flex items-center justify-center rounded-lg border-4 border-accent">
+                    <Icon name="Gamepad2" size={96} className="text-accent" />
+                  </div>
+                  <div className="text-center space-y-2">
+                    <p className="text-lg text-foreground">🔥 Королевская битва</p>
+                    <p className="text-lg text-foreground">👥 50 игроков</p>
+                    <p className="text-lg text-foreground">⚔️ Выживает сильнейший</p>
+                  </div>
+                  <Button 
+                    size="lg" 
+                    className="bg-accent hover:bg-accent/90 text-white font-bold text-2xl px-12 py-8 flex items-center gap-3"
+                    onClick={() => {
+                      window.open('https://ff.garena.com/', '_blank');
+                      toast({
+                        title: "Запуск Free Fire! 🔥",
+                        description: "Открываем официальный сайт игры...",
+                      });
+                    }}
+                  >
+                    <Icon name="Play" size={32} />
+                    ИГРАТЬ В FREE FIRE
+                  </Button>
+                  <p className="text-sm text-muted-foreground text-center">
+                    * Откроется официальный сайт Free Fire
+                  </p>
+                </CardContent>
+              </Card>
             </TabsContent>
           </Tabs>
         </div>
