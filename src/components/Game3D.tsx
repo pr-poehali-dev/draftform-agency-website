@@ -56,6 +56,36 @@ export default function Game3D() {
       });
     }
 
+    const trees: Array<{
+      x: number;
+      z: number;
+      height: number;
+    }> = [];
+
+    for (let i = 0; i < 30; i++) {
+      trees.push({
+        x: Math.random() * canvas.width - canvas.width / 2,
+        z: Math.random() * 1500 + 500,
+        height: Math.random() * 100 + 80
+      });
+    }
+
+    const characters: Array<{
+      x: number;
+      z: number;
+      type: number;
+      walkCycle: number;
+    }> = [];
+
+    for (let i = 0; i < 15; i++) {
+      characters.push({
+        x: Math.random() * canvas.width - canvas.width / 2,
+        z: Math.random() * 1500 + 200,
+        type: Math.floor(Math.random() * 3),
+        walkCycle: Math.random() * Math.PI * 2
+      });
+    }
+
     const drawGrass = () => {
       grass.sort((a, b) => b.z - a.z);
 
@@ -91,6 +121,62 @@ export default function Game3D() {
       });
     };
 
+    const drawTree = (x: number, y: number, height: number, scale: number, alpha: number) => {
+      ctx.fillStyle = `hsla(30, 40%, 30%, ${alpha})`;
+      ctx.fillRect(x - 5 * scale, y - height * 0.3, 10 * scale, height * 0.3);
+      
+      ctx.fillStyle = `hsla(120, 50%, 30%, ${alpha})`;
+      ctx.beginPath();
+      ctx.moveTo(x, y - height);
+      ctx.lineTo(x - 30 * scale, y - height * 0.6);
+      ctx.lineTo(x + 30 * scale, y - height * 0.6);
+      ctx.closePath();
+      ctx.fill();
+      
+      ctx.beginPath();
+      ctx.moveTo(x, y - height * 0.8);
+      ctx.lineTo(x - 25 * scale, y - height * 0.5);
+      ctx.lineTo(x + 25 * scale, y - height * 0.5);
+      ctx.closePath();
+      ctx.fill();
+      
+      ctx.fillStyle = `hsla(120, 60%, 35%, ${alpha})`;
+      ctx.beginPath();
+      ctx.moveTo(x, y - height * 0.65);
+      ctx.lineTo(x - 20 * scale, y - height * 0.4);
+      ctx.lineTo(x + 20 * scale, y - height * 0.4);
+      ctx.closePath();
+      ctx.fill();
+    };
+
+    const drawCharacter = (x: number, y: number, scale: number, alpha: number, type: number, walkCycle: number) => {
+      const colors = [
+        { body: '#3b82f6', accent: '#60a5fa' },
+        { body: '#ef4444', accent: '#f87171' },
+        { body: '#22c55e', accent: '#4ade80' }
+      ];
+      const color = colors[type];
+      
+      const bounce = Math.sin(walkCycle) * 3 * scale;
+      
+      ctx.fillStyle = `${color.body}${Math.floor(alpha * 255).toString(16).padStart(2, '0')}`;
+      ctx.beginPath();
+      ctx.arc(x, y - 35 * scale + bounce, 12 * scale, 0, Math.PI * 2);
+      ctx.fill();
+      
+      ctx.fillStyle = `${color.body}${Math.floor(alpha * 255).toString(16).padStart(2, '0')}`;
+      ctx.fillRect(x - 8 * scale, y - 25 * scale + bounce, 16 * scale, 20 * scale);
+      
+      const legOffset = Math.sin(walkCycle) * 5 * scale;
+      ctx.fillStyle = `${color.accent}${Math.floor(alpha * 255).toString(16).padStart(2, '0')}`;
+      ctx.fillRect(x - 7 * scale + legOffset, y - 8 * scale, 5 * scale, 8 * scale);
+      ctx.fillRect(x + 2 * scale - legOffset, y - 8 * scale, 5 * scale, 8 * scale);
+      
+      const armOffset = Math.sin(walkCycle + Math.PI) * 8 * scale;
+      ctx.fillRect(x - 10 * scale, y - 22 * scale + bounce + armOffset, 4 * scale, 12 * scale);
+      ctx.fillRect(x + 6 * scale, y - 22 * scale + bounce - armOffset, 4 * scale, 12 * scale);
+    };
+
     const draw3D = () => {
       const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
       gradient.addColorStop(0, '#0f172a');
@@ -100,6 +186,43 @@ export default function Game3D() {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       time += 0.015;
+
+      const allObjects = [
+        ...trees.map(t => ({ ...t, type: 'tree' as const })),
+        ...characters.map(c => ({ ...c, type: 'character' as const }))
+      ];
+      allObjects.sort((a, b) => b.z - a.z);
+
+      allObjects.forEach(obj => {
+        if (obj.type === 'tree') {
+          obj.z -= 1.5;
+          if (obj.z < 1) {
+            obj.z = 1500;
+            obj.x = Math.random() * canvas.width - canvas.width / 2;
+          }
+
+          const scale = 600 / obj.z;
+          const x2d = obj.x * scale + canvas.width / 2;
+          const y2d = canvas.height * 0.7 + (obj.z / 1500) * 100;
+          const alpha = 1 - obj.z / 1500;
+          
+          drawTree(x2d, y2d, obj.height * scale, scale, alpha);
+        } else {
+          obj.z -= 2;
+          obj.walkCycle += 0.15;
+          if (obj.z < 1) {
+            obj.z = 1500;
+            obj.x = Math.random() * canvas.width - canvas.width / 2;
+          }
+
+          const scale = 600 / obj.z;
+          const x2d = obj.x * scale + canvas.width / 2;
+          const y2d = canvas.height * 0.7 + (obj.z / 1500) * 100;
+          const alpha = 1 - obj.z / 1500;
+          
+          drawCharacter(x2d, y2d, scale, alpha, obj.type, obj.walkCycle);
+        }
+      });
 
       drawGrass();
 
