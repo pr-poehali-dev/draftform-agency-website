@@ -139,16 +139,19 @@
   animation: clouds-drift 60s linear infinite;
 }
 
-@keyframes character-idle {
+@keyframes character-wave {
   0%,
   100% {
-    transform: translateY(0) scale(1);
+    transform: translateY(0) rotate(0deg);
   }
-  50% {
-    transform: translateY(-10px) scale(1.02);
+  25% {
+    transform: translateY(-5px) rotate(-3deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(3deg);
   }
 }
 
-.animate-character-idle {
-  animation: character-idle 2s ease-in-out infinite;
+.animate-character-wave {
+  animation: character-wave 1.5s ease-in-out infinite;
 }
