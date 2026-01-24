@@ -311,9 +311,7 @@ export default function EarningGroupsTabs() {
                     </div>
                   </div>
                   
-                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm rounded-lg px-6 py-2 border-2 border-accent">
-                    <p className="text-sm font-bold text-gray-700">Добро пожаловать в лобби! 🎉</p>
-                  </div>
+
                 </div>
               </CardContent>
             </Card>
