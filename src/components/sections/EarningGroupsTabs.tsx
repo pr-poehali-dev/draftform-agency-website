@@ -13,12 +13,13 @@ export default function EarningGroupsTabs() {
       <div className="container mx-auto">
         <h3 className="text-2xl md:text-4xl mb-12 text-center text-primary">ГРУППЫ ЗАРАБОТКА</h3>
         <Tabs defaultValue="beginner" className="max-w-4xl mx-auto">
-          <TabsList className="grid w-full grid-cols-5 bg-background border-4 border-primary">
+          <TabsList className="grid w-full grid-cols-6 bg-background border-4 border-primary">
             <TabsTrigger value="beginner" className="text-lg font-bold">НОВИЧКИ</TabsTrigger>
             <TabsTrigger value="pro" className="text-lg font-bold">ПРО</TabsTrigger>
             <TabsTrigger value="expert" className="text-lg font-bold">ЭКСПЕРТЫ</TabsTrigger>
             <TabsTrigger value="investments" className="text-lg font-bold">ИНВЕСТИЦИИ</TabsTrigger>
             <TabsTrigger value="games" className="text-lg font-bold">ИГРЫ</TabsTrigger>
+            <TabsTrigger value="gamecreate" className="text-lg font-bold">СОЗДАНИЕ ИГР</TabsTrigger>
           </TabsList>
           <TabsContent value="beginner" className="mt-6">
             <Card className="border-4 border-primary bg-background">
@@ -244,6 +245,14 @@ export default function EarningGroupsTabs() {
                 </Card>
               ))}
             </div>
+          </TabsContent>
+          <TabsContent value="gamecreate" className="mt-6">
+            <Card className="border-4 border-accent bg-white">
+              <CardContent className="p-0">
+                <div className="w-full h-[600px] bg-white">
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
       </div>
