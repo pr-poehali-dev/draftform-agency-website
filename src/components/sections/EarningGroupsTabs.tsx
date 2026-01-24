@@ -299,10 +299,11 @@ export default function EarningGroupsTabs() {
 
                   <div className="absolute bottom-4 right-4">
                     <Button 
-                      className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold text-lg px-8 py-6 shadow-2xl border-4 border-yellow-600"
+                      className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold text-lg px-8 py-6 shadow-2xl border-4 border-yellow-600 flex items-center gap-2"
                       onClick={() => toast({ title: "🎮 Игра начинается!", description: "Добро пожаловать в мир приключений!" })}
                     >
-                      ⭐ НАЧАТЬ
+                      <img src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/ab82aff2-7e45-48da-90c3-a0be94dce92f.png" alt="Logo" className="w-6 h-6" />
+                      НАЧАТЬ
                     </Button>
                   </div>
 
