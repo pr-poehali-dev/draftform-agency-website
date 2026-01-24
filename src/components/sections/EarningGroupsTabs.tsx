@@ -252,7 +252,14 @@ export default function EarningGroupsTabs() {
                 <div className="w-full h-[600px] relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-sky-400 via-sky-300 to-green-300"></div>
                   
-                  <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-green-600 to-green-400"></div>
+                  <div 
+                    className="absolute bottom-0 left-0 right-0 h-64 bg-cover bg-center"
+                    style={{
+                      backgroundImage: 'url(https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/dedc18d1-bce2-4aa2-b0ce-ded34aa0c207.jpg)',
+                      transform: 'perspective(400px) rotateX(60deg)',
+                      transformOrigin: 'bottom'
+                    }}
+                  ></div>
                   
                   <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2">
                     <div className="relative">
