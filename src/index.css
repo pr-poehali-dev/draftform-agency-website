@@ -138,3 +138,17 @@
 .animate-clouds-drift {
   animation: clouds-drift 60s linear infinite;
 }
+
+@keyframes character-idle {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+.animate-character-idle {
+  animation: character-idle 2s ease-in-out infinite;
+}

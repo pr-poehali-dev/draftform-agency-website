@@ -266,11 +266,11 @@ export default function EarningGroupsTabs() {
                     }}
                   ></div>
                   
-                  <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2">
+                  <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2">
                     <img 
                       src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/3b39b254-d93d-4042-b82e-c4590483651b.png"
                       alt="Character"
-                      className="h-64 w-auto object-contain drop-shadow-2xl"
+                      className="h-80 w-auto object-contain drop-shadow-2xl animate-character-idle"
                     />
                   </div>
                   
