@@ -296,7 +296,15 @@ export default function EarningGroupsTabs() {
                       <p><span className="font-bold">E</span> - Действие</p>
                     </div>
                   </div>
-                  
+
+                  <div className="absolute bottom-4 right-4">
+                    <Button 
+                      className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold text-lg px-8 py-6 shadow-2xl border-4 border-yellow-600"
+                      onClick={() => toast({ title: "🎮 Игра начинается!", description: "Добро пожаловать в мир приключений!" })}
+                    >
+                      ⭐ НАЧАТЬ
+                    </Button>
+                  </div>
 
                 </div>
               </CardContent>
