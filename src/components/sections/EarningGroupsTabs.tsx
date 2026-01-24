@@ -247,9 +247,61 @@ export default function EarningGroupsTabs() {
             </div>
           </TabsContent>
           <TabsContent value="gamecreate" className="mt-6">
-            <Card className="border-4 border-accent bg-white">
+            <Card className="border-4 border-accent bg-gradient-to-b from-sky-300 to-green-200">
               <CardContent className="p-0">
-                <div className="w-full h-[600px] bg-white">
+                <div className="w-full h-[600px] relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-b from-sky-400 via-sky-300 to-green-300"></div>
+                  
+                  <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-green-600 to-green-400"></div>
+                  
+                  <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2">
+                    <div className="relative">
+                      <div className="w-16 h-24 bg-blue-600 rounded-t-lg border-4 border-blue-800 relative">
+                        <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-yellow-300 rounded-full border-4 border-yellow-600"></div>
+                        
+                        <div className="absolute top-2 left-2 w-3 h-3 bg-white rounded-full"></div>
+                        <div className="absolute top-2 right-2 w-3 h-3 bg-white rounded-full"></div>
+                        <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-6 h-2 bg-pink-400 rounded-full"></div>
+                        
+                        <div className="absolute -left-5 top-4 w-5 h-12 bg-blue-600 rounded-l-lg border-4 border-blue-800"></div>
+                        <div className="absolute -right-5 top-4 w-5 h-12 bg-blue-600 rounded-r-lg border-4 border-blue-800"></div>
+                        
+                        <div className="absolute -bottom-16 left-0 w-6 h-16 bg-blue-800 border-4 border-blue-900"></div>
+                        <div className="absolute -bottom-16 right-0 w-6 h-16 bg-blue-800 border-4 border-blue-900"></div>
+                        
+                        <div className="absolute -bottom-20 -left-2 w-10 h-4 bg-gray-800 rounded-lg border-2 border-black"></div>
+                        <div className="absolute -bottom-20 -right-2 w-10 h-4 bg-gray-800 rounded-lg border-2 border-black"></div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-4 border-2 border-accent">
+                    <h3 className="text-xl font-bold text-accent mb-2">🏛️ ЛОББИ</h3>
+                    <p className="text-sm text-gray-700">Ваш персонаж готов к приключениям!</p>
+                    <div className="mt-3 space-y-1 text-xs">
+                      <p className="flex items-center gap-2">
+                        <span className="text-green-600">❤️ HP:</span>
+                        <span className="font-bold">100/100</span>
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <span className="text-blue-600">⚡ Энергия:</span>
+                        <span className="font-bold">100/100</span>
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg p-4 border-2 border-accent">
+                    <h3 className="text-lg font-bold text-accent mb-2">🎮 Управление</h3>
+                    <div className="space-y-1 text-xs">
+                      <p><span className="font-bold">W A S D</span> - Движение</p>
+                      <p><span className="font-bold">Пробел</span> - Прыжок</p>
+                      <p><span className="font-bold">E</span> - Действие</p>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm rounded-lg px-6 py-2 border-2 border-accent">
+                    <p className="text-sm font-bold text-gray-700">Добро пожаловать в лобби! 🎉</p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
