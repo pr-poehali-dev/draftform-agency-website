@@ -4,19 +4,42 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function EarningGroupsTabs() {
   const { toast } = useToast();
   const [gameStarted, setGameStarted] = useState(false);
+  const [playerPos, setPlayerPos] = useState({ x: 5, y: 5 });
 
   const startGame = () => {
     setGameStarted(true);
     toast({ 
       title: "🎮 Игра начинается!", 
-      description: "Добро пожаловать в мир приключений!" 
+      description: "Используйте WASD для передвижения!" 
     });
   };
+
+  useEffect(() => {
+    if (!gameStarted) return;
+
+    const handleKeyPress = (e: KeyboardEvent) => {
+      const key = e.key.toLowerCase();
+      setPlayerPos(prev => {
+        let newX = prev.x;
+        let newY = prev.y;
+
+        if (key === 'w' && prev.y > 0) newY = prev.y - 1;
+        if (key === 's' && prev.y < 9) newY = prev.y + 1;
+        if (key === 'a' && prev.x > 0) newX = prev.x - 1;
+        if (key === 'd' && prev.x < 9) newX = prev.x + 1;
+
+        return { x: newX, y: newY };
+      });
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [gameStarted]);
 
   return (
     <section className="py-20 px-4 bg-card">
@@ -320,21 +343,50 @@ export default function EarningGroupsTabs() {
 
                 </div>
                 ) : (
-                  <div className="w-full h-[600px] flex items-center justify-center bg-gradient-to-br from-purple-600 via-blue-600 to-cyan-600">
-                    <div className="text-center text-white space-y-6">
-                      <div className="text-6xl animate-bounce">🎮</div>
-                      <h2 className="text-4xl font-bold">ИГРА ЗАГРУЖАЕТСЯ...</h2>
-                      <div className="flex justify-center gap-2">
-                        <div className="w-4 h-4 bg-white rounded-full animate-pulse"></div>
-                        <div className="w-4 h-4 bg-white rounded-full animate-pulse delay-100"></div>
-                        <div className="w-4 h-4 bg-white rounded-full animate-pulse delay-200"></div>
-                      </div>
+                  <div className="w-full h-[600px] relative overflow-hidden bg-gradient-to-b from-green-600 to-green-800">
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-3 border-2 border-yellow-600">
+                      <h3 className="text-sm font-bold text-gray-700">Позиция: X:{playerPos.x} Y:{playerPos.y}</h3>
+                      <p className="text-xs text-gray-600 mt-1">WASD - Движение</p>
+                    </div>
+
+                    <div className="absolute top-4 right-4">
                       <Button 
-                        className="bg-white text-purple-600 hover:bg-gray-100 font-bold text-lg px-8 py-4"
-                        onClick={() => setGameStarted(false)}
+                        className="bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-2"
+                        onClick={() => {
+                          setGameStarted(false);
+                          setPlayerPos({ x: 5, y: 5 });
+                        }}
                       >
-                        ← ВЕРНУТЬСЯ В ЛОББИ
+                        ✕ Выход
                       </Button>
+                    </div>
+
+                    <div className="absolute inset-0 flex items-center justify-center p-8">
+                      <div className="grid grid-cols-10 gap-1 bg-black/20 p-4 rounded-lg">
+                        {Array.from({ length: 100 }).map((_, idx) => {
+                          const x = idx % 10;
+                          const y = Math.floor(idx / 10);
+                          const isPlayer = x === playerPos.x && y === playerPos.y;
+                          const isGrass = (x + y) % 2 === 0;
+
+                          return (
+                            <div
+                              key={idx}
+                              className={`w-12 h-12 flex items-center justify-center text-2xl border border-gray-600 transition-all ${
+                                isGrass ? 'bg-green-500' : 'bg-green-600'
+                              } ${isPlayer ? 'ring-4 ring-yellow-400' : ''}`}
+                            >
+                              {isPlayer && (
+                                <img 
+                                  src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/b2d8c120-e678-4d31-b5ec-8eac4cb843ec.png"
+                                  alt="Player"
+                                  className="w-10 h-10 object-cover"
+                                />
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
                 )}
