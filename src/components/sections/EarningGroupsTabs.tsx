@@ -4,9 +4,19 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
+import { useState } from 'react';
 
 export default function EarningGroupsTabs() {
   const { toast } = useToast();
+  const [gameStarted, setGameStarted] = useState(false);
+
+  const startGame = () => {
+    setGameStarted(true);
+    toast({ 
+      title: "🎮 Игра начинается!", 
+      description: "Добро пожаловать в мир приключений!" 
+    });
+  };
 
   return (
     <section className="py-20 px-4 bg-card">
@@ -248,6 +258,7 @@ export default function EarningGroupsTabs() {
           <TabsContent value="gamecreate" className="mt-6">
             <Card className="border-4 border-accent bg-white">
               <CardContent className="p-0">
+                {!gameStarted ? (
                 <div className="w-full h-[600px] relative overflow-hidden bg-gradient-to-b from-sky-400 to-sky-200">
                   <div 
                     className="absolute inset-0 bg-cover bg-center animate-clouds-drift"
@@ -300,7 +311,7 @@ export default function EarningGroupsTabs() {
                   <div className="absolute bottom-4 right-4">
                     <Button 
                       className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold text-lg px-8 py-6 shadow-2xl border-4 border-yellow-600 flex items-center gap-2"
-                      onClick={() => toast({ title: "🎮 Игра начинается!", description: "Добро пожаловать в мир приключений!" })}
+                      onClick={startGame}
                     >
                       <img src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/ca32f5b8-a860-4a33-86c3-695feb38b7ea.png" alt="Logo" className="w-6 h-6" />
                       НАЧАТЬ
@@ -308,6 +319,25 @@ export default function EarningGroupsTabs() {
                   </div>
 
                 </div>
+                ) : (
+                  <div className="w-full h-[600px] flex items-center justify-center bg-gradient-to-br from-purple-600 via-blue-600 to-cyan-600">
+                    <div className="text-center text-white space-y-6">
+                      <div className="text-6xl animate-bounce">🎮</div>
+                      <h2 className="text-4xl font-bold">ИГРА ЗАГРУЖАЕТСЯ...</h2>
+                      <div className="flex justify-center gap-2">
+                        <div className="w-4 h-4 bg-white rounded-full animate-pulse"></div>
+                        <div className="w-4 h-4 bg-white rounded-full animate-pulse delay-100"></div>
+                        <div className="w-4 h-4 bg-white rounded-full animate-pulse delay-200"></div>
+                      </div>
+                      <Button 
+                        className="bg-white text-purple-600 hover:bg-gray-100 font-bold text-lg px-8 py-4"
+                        onClick={() => setGameStarted(false)}
+                      >
+                        ← ВЕРНУТЬСЯ В ЛОББИ
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
