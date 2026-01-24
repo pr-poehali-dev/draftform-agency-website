@@ -247,14 +247,13 @@ export default function EarningGroupsTabs() {
             </div>
           </TabsContent>
           <TabsContent value="gamecreate" className="mt-6">
-            <Card className="border-4 border-accent bg-gradient-to-b from-sky-300 to-green-200">
+            <Card className="border-4 border-accent bg-white">
               <CardContent className="p-0">
-                <div className="w-full h-[600px] relative overflow-hidden">
+                <div className="w-full h-[600px] relative overflow-hidden bg-white">
                   <div 
-                    className="absolute inset-0 bg-cover bg-center animate-clouds-drift"
+                    className="absolute bottom-0 left-0 right-0 h-48 bg-contain bg-repeat-x bg-bottom animate-grass-sway"
                     style={{
-                      backgroundImage: 'url(https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/4380689e-e32f-49c9-9210-9c0584e47fdf.jpg)',
-                      backgroundSize: '200% 100%'
+                      backgroundImage: 'url(https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/b8cae812-9eaa-48b9-a886-239536d9f487.jpg)'
                     }}
                   ></div>
                   
