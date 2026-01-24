@@ -260,7 +260,7 @@ export default function EarningGroupsTabs() {
                   ></div>
                   
                   <div 
-                    className="absolute bottom-0 left-0 right-0 h-48 bg-contain bg-repeat-x bg-bottom animate-grass-sway"
+                    className="absolute bottom-0 left-0 right-0 h-48 bg-contain bg-repeat-x bg-bottom"
                     style={{
                       backgroundImage: 'url(https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/965b174f-63b5-4ec9-ac2e-8510aa2efce1.png)'
                     }}
