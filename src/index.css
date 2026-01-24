@@ -108,3 +108,20 @@
 .animate-snowfall-delay {
   animation: snowfall-delay 10s linear infinite;
 }
+
+@keyframes grass-sway {
+  0%,
+  100% {
+    transform: translateX(0) scale(1);
+  }
+  25% {
+    transform: translateX(-2px) scale(1.01);
+  }
+  75% {
+    transform: translateX(2px) scale(1.01);
+  }
+}
+
+.animate-grass-sway {
+  animation: grass-sway 3s ease-in-out infinite;
+}

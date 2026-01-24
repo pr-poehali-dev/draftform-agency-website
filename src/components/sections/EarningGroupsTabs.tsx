@@ -253,11 +253,12 @@ export default function EarningGroupsTabs() {
                   <div className="absolute inset-0 bg-gradient-to-b from-sky-400 via-sky-300 to-green-300"></div>
                   
                   <div 
-                    className="absolute bottom-0 left-0 right-0 h-64 bg-cover bg-center"
+                    className="absolute bottom-0 left-0 right-0 h-80 bg-cover bg-center animate-grass-sway"
                     style={{
-                      backgroundImage: 'url(https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/dedc18d1-bce2-4aa2-b0ce-ded34aa0c207.jpg)',
-                      transform: 'perspective(400px) rotateX(60deg)',
-                      transformOrigin: 'bottom'
+                      backgroundImage: 'url(https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/eea0159e-a088-4b2b-baa7-db311d67d1c7.jpg)',
+                      transform: 'perspective(600px) rotateX(65deg)',
+                      transformOrigin: 'bottom',
+                      filter: 'brightness(1.1) saturate(1.2)'
                     }}
                   ></div>
                   
