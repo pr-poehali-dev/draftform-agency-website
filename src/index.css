@@ -125,3 +125,16 @@
 .animate-grass-sway {
   animation: grass-sway 3s ease-in-out infinite;
 }
+
+@keyframes clouds-drift {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 100% center;
+  }
+}
+
+.animate-clouds-drift {
+  animation: clouds-drift 60s linear infinite;
+}
