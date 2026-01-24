@@ -267,24 +267,11 @@ export default function EarningGroupsTabs() {
                   ></div>
                   
                   <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2">
-                    <div className="relative">
-                      <div className="w-16 h-24 bg-blue-600 rounded-t-lg border-4 border-blue-800 relative">
-                        <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-yellow-300 rounded-full border-4 border-yellow-600"></div>
-                        
-                        <div className="absolute top-2 left-2 w-3 h-3 bg-white rounded-full"></div>
-                        <div className="absolute top-2 right-2 w-3 h-3 bg-white rounded-full"></div>
-                        <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-6 h-2 bg-pink-400 rounded-full"></div>
-                        
-                        <div className="absolute -left-5 top-4 w-5 h-12 bg-blue-600 rounded-l-lg border-4 border-blue-800"></div>
-                        <div className="absolute -right-5 top-4 w-5 h-12 bg-blue-600 rounded-r-lg border-4 border-blue-800"></div>
-                        
-                        <div className="absolute -bottom-16 left-0 w-6 h-16 bg-blue-800 border-4 border-blue-900"></div>
-                        <div className="absolute -bottom-16 right-0 w-6 h-16 bg-blue-800 border-4 border-blue-900"></div>
-                        
-                        <div className="absolute -bottom-20 -left-2 w-10 h-4 bg-gray-800 rounded-lg border-2 border-black"></div>
-                        <div className="absolute -bottom-20 -right-2 w-10 h-4 bg-gray-800 rounded-lg border-2 border-black"></div>
-                      </div>
-                    </div>
+                    <img 
+                      src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/3b39b254-d93d-4042-b82e-c4590483651b.png"
+                      alt="Character"
+                      className="h-64 w-auto object-contain drop-shadow-2xl"
+                    />
                   </div>
                   
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-4 border-2 border-accent">
