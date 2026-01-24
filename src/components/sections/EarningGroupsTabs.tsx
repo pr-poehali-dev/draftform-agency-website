@@ -258,13 +258,38 @@ export default function EarningGroupsTabs() {
                     }}
                   ></div>
                   
-                  <div 
-                    className="absolute bottom-0 left-0 right-0 h-32 bg-cover bg-center animate-grass-sway"
-                    style={{
-                      backgroundImage: 'url(https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/files/7381bbd4-35a9-4b56-b605-ef6f2ff9cae5.jpg)',
-                      filter: 'brightness(1.1) saturate(1.3)'
-                    }}
-                  ></div>
+                  <div className="absolute bottom-0 left-0 right-0 h-48 flex items-end justify-around px-8">
+                    <img 
+                      src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/b8366ffe-f111-4ef8-a30e-0e71735653ac.png" 
+                      alt="grass" 
+                      className="h-32 animate-grass-sway"
+                      style={{ animationDelay: '0s' }}
+                    />
+                    <img 
+                      src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/b8366ffe-f111-4ef8-a30e-0e71735653ac.png" 
+                      alt="grass" 
+                      className="h-28 animate-grass-sway"
+                      style={{ animationDelay: '0.5s' }}
+                    />
+                    <img 
+                      src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/b8366ffe-f111-4ef8-a30e-0e71735653ac.png" 
+                      alt="grass" 
+                      className="h-36 animate-grass-sway"
+                      style={{ animationDelay: '1s' }}
+                    />
+                    <img 
+                      src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/b8366ffe-f111-4ef8-a30e-0e71735653ac.png" 
+                      alt="grass" 
+                      className="h-30 animate-grass-sway"
+                      style={{ animationDelay: '1.5s' }}
+                    />
+                    <img 
+                      src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/b8366ffe-f111-4ef8-a30e-0e71735653ac.png" 
+                      alt="grass" 
+                      className="h-32 animate-grass-sway"
+                      style={{ animationDelay: '2s' }}
+                    />
+                  </div>
                   
                   <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2">
                     <div className="relative">
