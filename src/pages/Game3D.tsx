@@ -113,8 +113,72 @@ export default function Game3D() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
-      <div ref={containerRef} className="w-full max-w-7xl">
+    <div className="min-h-screen bg-black flex p-4 gap-4">
+      <div className="w-80 bg-gray-900 rounded-lg border-4 border-accent p-6 space-y-6 flex-shrink-0">
+        <h2 className="text-2xl font-bold text-accent text-center mb-6">🏛️ ЛОББИ</h2>
+        
+        <div className="space-y-4">
+          <div className="bg-gray-800 rounded-lg p-4 border-2 border-purple-500">
+            <div className="flex items-center gap-3 mb-3">
+              <Icon name="ShoppingCart" size={28} className="text-purple-500" />
+              <h3 className="text-xl font-bold text-white">МАГАЗИН</h3>
+            </div>
+            <div className="space-y-2 mb-4">
+              <div className="flex justify-between items-center bg-gray-700 p-2 rounded">
+                <span className="text-sm">🔫 Оружие</span>
+                <span className="text-yellow-400 font-bold">500₽</span>
+              </div>
+              <div className="flex justify-between items-center bg-gray-700 p-2 rounded">
+                <span className="text-sm">🛡️ Броня</span>
+                <span className="text-yellow-400 font-bold">300₽</span>
+              </div>
+              <div className="flex justify-between items-center bg-gray-700 p-2 rounded">
+                <span className="text-sm">💊 Аптечка</span>
+                <span className="text-yellow-400 font-bold">100₽</span>
+              </div>
+            </div>
+            <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold">
+              КУПИТЬ
+            </Button>
+          </div>
+
+          <div className="bg-gray-800 rounded-lg p-4 border-2 border-blue-500">
+            <div className="flex items-center gap-3 mb-3">
+              <Icon name="Package" size={28} className="text-blue-500" />
+              <h3 className="text-xl font-bold text-white">СКЛАД</h3>
+            </div>
+            <div className="space-y-2 mb-4">
+              <div className="flex justify-between items-center bg-gray-700 p-2 rounded">
+                <span className="text-sm">🔫 AK-47</span>
+                <span className="text-green-400 font-bold">x1</span>
+              </div>
+              <div className="flex justify-between items-center bg-gray-700 p-2 rounded">
+                <span className="text-sm">💊 Аптечка</span>
+                <span className="text-green-400 font-bold">x3</span>
+              </div>
+              <div className="flex justify-between items-center bg-gray-700 p-2 rounded">
+                <span className="text-sm">🎯 Патроны</span>
+                <span className="text-green-400 font-bold">x50</span>
+              </div>
+            </div>
+            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold">
+              ЭКИПИРОВАТЬ
+            </Button>
+          </div>
+
+          <div className="bg-gray-800 rounded-lg p-4 border-2 border-yellow-500">
+            <div className="flex items-center gap-3 mb-2">
+              <Icon name="Coins" size={24} className="text-yellow-500" />
+              <div>
+                <p className="text-xs text-gray-400">Баланс</p>
+                <p className="text-2xl font-bold text-yellow-400">1,250₽</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ref={containerRef} className="flex-1 flex flex-col">
         <div className="mb-4 flex items-center justify-between">
           <h1 className="text-3xl font-bold text-white">🎮 3D ИГРА</h1>
           <Button
@@ -129,7 +193,7 @@ export default function Game3D() {
         
         <canvas 
           ref={canvasRef} 
-          className="w-full rounded-lg border-4 border-accent shadow-2xl cursor-crosshair bg-black"
+          className="w-full rounded-lg border-4 border-accent shadow-2xl cursor-crosshair bg-black flex-1"
         />
 
         <div className="mt-4 text-white space-y-2">
