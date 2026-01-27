@@ -46,13 +46,12 @@ export default function EarningGroupsTabs() {
       <div className="container mx-auto">
         <h3 className="text-2xl md:text-4xl mb-12 text-center text-primary">ГРУППЫ ЗАРАБОТКА</h3>
         <Tabs defaultValue="beginner" className="max-w-4xl mx-auto">
-          <TabsList className="grid w-full grid-cols-6 bg-background border-4 border-primary">
+          <TabsList className="grid w-full grid-cols-5 bg-background border-4 border-primary">
             <TabsTrigger value="beginner" className="text-lg font-bold">НОВИЧКИ</TabsTrigger>
             <TabsTrigger value="pro" className="text-lg font-bold">ПРО</TabsTrigger>
             <TabsTrigger value="expert" className="text-lg font-bold">ЭКСПЕРТЫ</TabsTrigger>
             <TabsTrigger value="investments" className="text-lg font-bold">ИНВЕСТИЦИИ</TabsTrigger>
             <TabsTrigger value="gamecreate" className="text-lg font-bold">СОЗДАНИЕ ИГР</TabsTrigger>
-            <TabsTrigger value="zombiefarm" className="text-lg font-bold">🧟 ЗОМБИ ФЕРМА</TabsTrigger>
           </TabsList>
           <TabsContent value="beginner" className="mt-6">
             <Card className="border-4 border-primary bg-background">
@@ -387,102 +386,7 @@ export default function EarningGroupsTabs() {
               </CardContent>
             </Card>
           </TabsContent>
-          <TabsContent value="zombiefarm" className="mt-6">
-            <Card className="border-4 border-primary bg-background">
-              <CardHeader>
-                <CardTitle className="text-3xl text-primary">🧟 ЗОМБИ ФЕРМА</CardTitle>
-                <CardDescription className="text-lg">Используй WASD для движения персонажа по острову!</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-2xl border-4 border-primary bg-sky-400">
-                  <img 
-                    src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/1103768e-3155-4574-ad85-6f3aafb328ed.png" 
-                    alt="Зомби Ферма - Игровой остров"
-                    className="w-full h-full object-cover"
-                  />
-                  
-                  <div 
-                    className="absolute text-6xl transition-all duration-200"
-                    style={{
-                      left: `${playerPos.x * 10}%`,
-                      top: `${playerPos.y * 10}%`,
-                      transform: 'translate(-50%, -50%)'
-                    }}
-                  >
-                    🧟‍♂️
-                  </div>
-                  
-                  <div 
-                    className="absolute text-5xl transition-all duration-300"
-                    style={{
-                      left: `${(playerPos.x * 7 + 20) % 100}%`,
-                      top: `${(playerPos.y * 5 + 30) % 100}%`,
-                      transform: 'translate(-50%, -50%)'
-                    }}
-                  >
-                    🌾
-                  </div>
-                  
-                  <div 
-                    className="absolute text-5xl transition-all duration-500"
-                    style={{
-                      left: `${(playerPos.x * 3 + 50) % 100}%`,
-                      top: `${(playerPos.y * 8 + 20) % 100}%`,
-                      transform: 'translate(-50%, -50%)'
-                    }}
-                  >
-                    🧟‍♀️
-                  </div>
-                  
-                  <div 
-                    className="absolute text-4xl transition-all duration-400"
-                    style={{
-                      left: `${(playerPos.x * 4 + 70) % 100}%`,
-                      top: `${(playerPos.y * 6 + 60) % 100}%`,
-                      transform: 'translate(-50%, -50%)'
-                    }}
-                  >
-                    🥕
-                  </div>
-                  
-                  <div 
-                    className="absolute text-5xl transition-all duration-600"
-                    style={{
-                      left: `${(playerPos.x * 2 + 15) % 100}%`,
-                      top: `${(playerPos.y * 9 + 70) % 100}%`,
-                      transform: 'translate(-50%, -50%)'
-                    }}
-                  >
-                    🧟
-                  </div>
 
-                  <div className="absolute bottom-4 left-4 bg-black/70 text-white px-4 py-2 rounded-lg border-2 border-primary">
-                    <div className="text-sm font-bold">Управление: W A S D</div>
-                    <div className="text-xs">Позиция: X:{playerPos.x} Y:{playerPos.y}</div>
-                  </div>
-                </div>
-
-                <div className="mt-6 grid grid-cols-4 gap-3">
-                  <div className="bg-card border-2 border-primary rounded-lg p-3 text-center">
-                    <div className="text-3xl mb-1">🧟</div>
-                    <div className="text-sm font-bold">Зомби: 5</div>
-                  </div>
-                  <div className="bg-card border-2 border-primary rounded-lg p-3 text-center">
-                    <div className="text-3xl mb-1">🌾</div>
-                    <div className="text-sm font-bold">Урожай: 47</div>
-                  </div>
-                  <div className="bg-card border-2 border-primary rounded-lg p-3 text-center">
-                    <div className="text-3xl mb-1">🏠</div>
-                    <div className="text-sm font-bold">Здания: 23</div>
-                  </div>
-                  <div className="bg-card border-2 border-primary rounded-lg p-3 text-center">
-                    <div className="text-3xl mb-1">💰</div>
-                    <div className="text-sm font-bold">Монеты: 1000</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
         </Tabs>
       </div>
     </section>
