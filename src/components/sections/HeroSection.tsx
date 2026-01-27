@@ -33,23 +33,7 @@ export default function HeroSection({ onInvestmentsClick }: HeroSectionProps) {
             style={{ imageRendering: 'pixelated' }}
           />
         </div>
-        <div className="relative inline-block mb-6 cursor-pointer" onClick={handleCharacterClick}>
-          <img 
-            src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/75d7be62-b6ee-4507-8bf8-714c9dfb7975.png" 
-            alt="Character" 
-            className="w-48 h-48 mx-auto object-contain hover:scale-105 transition-transform"
-          />
-          {showEmoji && (
-            <div 
-              className="absolute pointer-events-none animate-emoji-float"
-              style={{ left: `${emojiPosition.x}px`, top: `${emojiPosition.y}px` }}
-            >
-              <div className="bg-white rounded-full px-3 py-2 shadow-lg border-4 border-primary text-3xl">
-                {currentEmoji}
-              </div>
-            </div>
-          )}
-        </div>
+
         <h2 className="text-3xl md:text-5xl mb-6 text-primary leading-relaxed">
           АГЕНТСТВО<br/>ДРАФОРМАЦИЯ
         </h2>
