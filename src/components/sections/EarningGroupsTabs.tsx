@@ -391,137 +391,93 @@ export default function EarningGroupsTabs() {
             <Card className="border-4 border-primary bg-background">
               <CardHeader>
                 <CardTitle className="text-3xl text-primary">🧟 ЗОМБИ ФЕРМА</CardTitle>
-                <CardDescription className="text-lg">Управляй островом, выращивай урожай и развивай ферму</CardDescription>
+                <CardDescription className="text-lg">Используй WASD для движения персонажа по острову!</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="relative w-full aspect-video mb-6 rounded-lg overflow-hidden shadow-2xl border-4 border-primary">
+                <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-2xl border-4 border-primary bg-sky-400">
                   <img 
                     src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/1103768e-3155-4574-ad85-6f3aafb328ed.png" 
                     alt="Зомби Ферма - Игровой остров"
                     className="w-full h-full object-cover"
                   />
+                  
+                  <div 
+                    className="absolute text-6xl transition-all duration-200"
+                    style={{
+                      left: `${playerPos.x * 10}%`,
+                      top: `${playerPos.y * 10}%`,
+                      transform: 'translate(-50%, -50%)'
+                    }}
+                  >
+                    🧟‍♂️
+                  </div>
+                  
+                  <div 
+                    className="absolute text-5xl transition-all duration-300"
+                    style={{
+                      left: `${(playerPos.x * 7 + 20) % 100}%`,
+                      top: `${(playerPos.y * 5 + 30) % 100}%`,
+                      transform: 'translate(-50%, -50%)'
+                    }}
+                  >
+                    🌾
+                  </div>
+                  
+                  <div 
+                    className="absolute text-5xl transition-all duration-500"
+                    style={{
+                      left: `${(playerPos.x * 3 + 50) % 100}%`,
+                      top: `${(playerPos.y * 8 + 20) % 100}%`,
+                      transform: 'translate(-50%, -50%)'
+                    }}
+                  >
+                    🧟‍♀️
+                  </div>
+                  
+                  <div 
+                    className="absolute text-4xl transition-all duration-400"
+                    style={{
+                      left: `${(playerPos.x * 4 + 70) % 100}%`,
+                      top: `${(playerPos.y * 6 + 60) % 100}%`,
+                      transform: 'translate(-50%, -50%)'
+                    }}
+                  >
+                    🥕
+                  </div>
+                  
+                  <div 
+                    className="absolute text-5xl transition-all duration-600"
+                    style={{
+                      left: `${(playerPos.x * 2 + 15) % 100}%`,
+                      top: `${(playerPos.y * 9 + 70) % 100}%`,
+                      transform: 'translate(-50%, -50%)'
+                    }}
+                  >
+                    🧟
+                  </div>
+
+                  <div className="absolute bottom-4 left-4 bg-black/70 text-white px-4 py-2 rounded-lg border-2 border-primary">
+                    <div className="text-sm font-bold">Управление: W A S D</div>
+                    <div className="text-xs">Позиция: X:{playerPos.x} Y:{playerPos.y}</div>
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 mb-6">
-                  <div className="bg-card border-2 border-primary rounded-lg p-4 text-center">
-                    <div className="text-4xl mb-2">🌾</div>
-                    <div className="text-primary font-bold text-xl">47</div>
-                    <div className="text-foreground/70 text-sm">Грядок</div>
+                <div className="mt-6 grid grid-cols-4 gap-3">
+                  <div className="bg-card border-2 border-primary rounded-lg p-3 text-center">
+                    <div className="text-3xl mb-1">🧟</div>
+                    <div className="text-sm font-bold">Зомби: 5</div>
                   </div>
-                  <div className="bg-card border-2 border-primary rounded-lg p-4 text-center">
-                    <div className="text-4xl mb-2">🏠</div>
-                    <div className="text-primary font-bold text-xl">23</div>
-                    <div className="text-foreground/70 text-sm">Зданий</div>
+                  <div className="bg-card border-2 border-primary rounded-lg p-3 text-center">
+                    <div className="text-3xl mb-1">🌾</div>
+                    <div className="text-sm font-bold">Урожай: 47</div>
                   </div>
-                  <div className="bg-card border-2 border-primary rounded-lg p-4 text-center">
-                    <div className="text-4xl mb-2">🧟</div>
-                    <div className="text-primary font-bold text-xl">15</div>
-                    <div className="text-foreground/70 text-sm">Зомби</div>
+                  <div className="bg-card border-2 border-primary rounded-lg p-3 text-center">
+                    <div className="text-3xl mb-1">🏠</div>
+                    <div className="text-sm font-bold">Здания: 23</div>
                   </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="bg-card border-2 border-primary rounded-lg p-6">
-                    <h4 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
-                      🏗️ ПОСТРОЙКИ НА ОСТРОВЕ
-                    </h4>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
-                      <div className="bg-background p-3 rounded border border-primary/50">
-                        <div className="text-3xl mb-1">🏰</div>
-                        <div className="text-sm font-bold">Замок</div>
-                      </div>
-                      <div className="bg-background p-3 rounded border border-primary/50">
-                        <div className="text-3xl mb-1">🗼</div>
-                        <div className="text-sm font-bold">Башня</div>
-                      </div>
-                      <div className="bg-background p-3 rounded border border-primary/50">
-                        <div className="text-3xl mb-1">🎪</div>
-                        <div className="text-sm font-bold">Шатры</div>
-                      </div>
-                      <div className="bg-background p-3 rounded border border-primary/50">
-                        <div className="text-3xl mb-1">🌳</div>
-                        <div className="text-sm font-bold">Деревья</div>
-                      </div>
-                      <div className="bg-background p-3 rounded border border-primary/50">
-                        <div className="text-3xl mb-1">⛰️</div>
-                        <div className="text-sm font-bold">Скалы</div>
-                      </div>
-                      <div className="bg-background p-3 rounded border border-primary/50">
-                        <div className="text-3xl mb-1">🏡</div>
-                        <div className="text-sm font-bold">Дома</div>
-                      </div>
-                      <div className="bg-background p-3 rounded border border-primary/50">
-                        <div className="text-3xl mb-1">🛖</div>
-                        <div className="text-sm font-bold">Хижины</div>
-                      </div>
-                      <div className="bg-background p-3 rounded border border-primary/50">
-                        <div className="text-3xl mb-1">🌊</div>
-                        <div className="text-sm font-bold">Причал</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-card border-2 border-primary rounded-lg p-6">
-                    <h4 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
-                      🌱 ФЕРМА И УРОЖАЙ
-                    </h4>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="bg-background p-4 rounded border border-primary/50">
-                        <div className="flex items-center gap-3 mb-2">
-                          <span className="text-3xl">🌾</span>
-                          <div>
-                            <div className="font-bold">Пшеница</div>
-                            <div className="text-sm text-foreground/70">12 грядок</div>
-                          </div>
-                        </div>
-                        <Button size="sm" className="w-full bg-primary hover:bg-primary/90 font-bold">Собрать</Button>
-                      </div>
-                      <div className="bg-background p-4 rounded border border-primary/50">
-                        <div className="flex items-center gap-3 mb-2">
-                          <span className="text-3xl">🥕</span>
-                          <div>
-                            <div className="font-bold">Морковь</div>
-                            <div className="text-sm text-foreground/70">8 грядок</div>
-                          </div>
-                        </div>
-                        <Button size="sm" className="w-full bg-primary hover:bg-primary/90 font-bold">Собрать</Button>
-                      </div>
-                      <div className="bg-background p-4 rounded border border-primary/50">
-                        <div className="flex items-center gap-3 mb-2">
-                          <span className="text-3xl">🌽</span>
-                          <div>
-                            <div className="font-bold">Кукуруза</div>
-                            <div className="text-sm text-foreground/70">15 грядок</div>
-                          </div>
-                        </div>
-                        <Button size="sm" className="w-full bg-primary hover:bg-primary/90 font-bold">Собрать</Button>
-                      </div>
-                      <div className="bg-background p-4 rounded border border-primary/50">
-                        <div className="flex items-center gap-3 mb-2">
-                          <span className="text-3xl">🍅</span>
-                          <div>
-                            <div className="font-bold">Помидоры</div>
-                            <div className="text-sm text-foreground/70">10 грядок</div>
-                          </div>
-                        </div>
-                        <Button size="sm" className="w-full bg-primary hover:bg-primary/90 font-bold">Собрать</Button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-card border-2 border-primary rounded-lg p-6">
-                    <h4 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
-                      🧟‍♂️ ЗОМБИ-РАБОТНИКИ
-                    </h4>
-                    <p className="text-foreground/80 mb-4">На твоей ферме работают 15 зомби. Они обрабатывают грядки, строят здания и охраняют остров!</p>
-                    <div className="flex gap-3">
-                      <Button className="flex-1 bg-primary hover:bg-primary/90 font-bold text-lg">
-                        🧟 Нанять зомби
-                      </Button>
-                      <Button className="flex-1 bg-primary hover:bg-primary/90 font-bold text-lg">
-                        ⚡ Улучшить
-                      </Button>
-                    </div>
+                  <div className="bg-card border-2 border-primary rounded-lg p-3 text-center">
+                    <div className="text-3xl mb-1">💰</div>
+                    <div className="text-sm font-bold">Монеты: 1000</div>
                   </div>
                 </div>
               </CardContent>
