@@ -282,22 +282,15 @@ export default function EarningGroupsTabs() {
             <Card className="border-4 border-accent bg-white">
               <CardContent className="p-0">
                 {!gameStarted ? (
-                <div className="w-full h-[600px] relative overflow-hidden bg-gradient-to-b from-sky-400 to-sky-200">
+                <div className="w-full h-[600px] relative overflow-hidden">
                   <div 
-                    className="absolute inset-0 bg-cover bg-center animate-clouds-drift"
+                    className="absolute inset-0 bg-cover bg-center"
                     style={{
-                      backgroundImage: 'url(https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/4380689e-e32f-49c9-9210-9c0584e47fdf.jpg)',
-                      backgroundSize: '200% 100%',
-                      opacity: 0.7
+                      backgroundImage: 'url(https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/877aa321-4a6c-40b2-b3c9-e997bbcb3147.jpg)'
                     }}
                   ></div>
                   
-                  <div 
-                    className="absolute bottom-0 left-0 right-0 h-48 bg-contain bg-repeat-x bg-bottom"
-                    style={{
-                      backgroundImage: 'url(https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/965b174f-63b5-4ec9-ac2e-8510aa2efce1.png)'
-                    }}
-                  ></div>
+                  <div className="absolute inset-0 bg-black/20"></div>
                   
                   <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-12">
                     <img 
