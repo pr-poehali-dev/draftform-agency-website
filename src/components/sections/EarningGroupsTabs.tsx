@@ -294,7 +294,7 @@ export default function EarningGroupsTabs() {
                   
                   <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-12">
                     <img 
-                      src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/2236eb45-e301-4eb6-a505-9777badd12b1.png"
+                      src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/75d7be62-b6ee-4507-8bf8-714c9dfb7975.png"
                       alt="Character"
                       className="h-96 w-auto drop-shadow-2xl object-contain"
                     />
