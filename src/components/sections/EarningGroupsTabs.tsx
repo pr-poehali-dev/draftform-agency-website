@@ -46,12 +46,13 @@ export default function EarningGroupsTabs() {
       <div className="container mx-auto">
         <h3 className="text-2xl md:text-4xl mb-12 text-center text-primary">ГРУППЫ ЗАРАБОТКА</h3>
         <Tabs defaultValue="beginner" className="max-w-4xl mx-auto">
-          <TabsList className="grid w-full grid-cols-5 bg-background border-4 border-primary">
+          <TabsList className="grid w-full grid-cols-6 bg-background border-4 border-primary">
             <TabsTrigger value="beginner" className="text-lg font-bold">НОВИЧКИ</TabsTrigger>
             <TabsTrigger value="pro" className="text-lg font-bold">ПРО</TabsTrigger>
             <TabsTrigger value="expert" className="text-lg font-bold">ЭКСПЕРТЫ</TabsTrigger>
             <TabsTrigger value="investments" className="text-lg font-bold">ИНВЕСТИЦИИ</TabsTrigger>
             <TabsTrigger value="gamecreate" className="text-lg font-bold">СОЗДАНИЕ ИГР</TabsTrigger>
+            <TabsTrigger value="zombiefarm" className="text-lg font-bold">🧟 ЗОМБИ ФЕРМА</TabsTrigger>
           </TabsList>
           <TabsContent value="beginner" className="mt-6">
             <Card className="border-4 border-primary bg-background">
@@ -383,6 +384,77 @@ export default function EarningGroupsTabs() {
                     </div>
                   </div>
                 )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="zombiefarm" className="mt-6">
+            <Card className="border-4 border-green-600 bg-gradient-to-br from-gray-900 to-green-950">
+              <CardHeader>
+                <CardTitle className="text-3xl text-green-400 flex items-center gap-3">
+                  <img 
+                    src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/files/a9c3619e-da92-4a11-8b07-da358e55655b.jpg" 
+                    alt="Zombie Farm"
+                    className="w-12 h-12 rounded-lg"
+                  />
+                  ЗОМБИ ФЕРМА
+                </CardTitle>
+                <CardDescription className="text-green-200 text-lg">Выращивай зомби и зарабатывай!</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-3 gap-4 mb-6">
+                  <div className="bg-black/40 border-2 border-green-600 rounded-lg p-4 text-center">
+                    <div className="text-4xl mb-2">🧟</div>
+                    <div className="text-green-400 font-bold">Зомби: 0</div>
+                  </div>
+                  <div className="bg-black/40 border-2 border-yellow-600 rounded-lg p-4 text-center">
+                    <div className="text-4xl mb-2">🌾</div>
+                    <div className="text-yellow-400 font-bold">Урожай: 0</div>
+                  </div>
+                  <div className="bg-black/40 border-2 border-purple-600 rounded-lg p-4 text-center">
+                    <div className="text-4xl mb-2">💰</div>
+                    <div className="text-purple-400 font-bold">Монеты: 100</div>
+                  </div>
+                </div>
+
+                <div className="bg-black/60 border-2 border-green-700 rounded-lg p-6 mb-6">
+                  <h4 className="text-xl font-bold text-green-400 mb-4">🏪 МАГАЗИН ЗОМБИ</h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-green-900/50 border border-green-600 rounded-lg p-4">
+                      <div className="text-3xl mb-2">🧟‍♂️</div>
+                      <div className="text-white font-bold mb-1">Рабочий Зомби</div>
+                      <div className="text-green-300 text-sm mb-3">+1 урожай/час</div>
+                      <Button className="w-full bg-green-600 hover:bg-green-700 text-white font-bold">
+                        Купить (50💰)
+                      </Button>
+                    </div>
+                    <div className="bg-yellow-900/50 border border-yellow-600 rounded-lg p-4">
+                      <div className="text-3xl mb-2">🧟‍♀️</div>
+                      <div className="text-white font-bold mb-1">Быстрый Зомби</div>
+                      <div className="text-yellow-300 text-sm mb-3">+3 урожай/час</div>
+                      <Button className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-bold">
+                        Купить (150💰)
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-black/60 border-2 border-red-700 rounded-lg p-6">
+                  <h4 className="text-xl font-bold text-red-400 mb-4">⚡ УЛУЧШЕНИЯ</h4>
+                  <ul className="space-y-3 text-white">
+                    <li className="flex items-center justify-between bg-red-900/30 p-3 rounded">
+                      <span>🔥 Ускорение фермы</span>
+                      <Button size="sm" className="bg-red-600 hover:bg-red-700">200💰</Button>
+                    </li>
+                    <li className="flex items-center justify-between bg-red-900/30 p-3 rounded">
+                      <span>💪 Сила зомби x2</span>
+                      <Button size="sm" className="bg-red-600 hover:bg-red-700">500💰</Button>
+                    </li>
+                    <li className="flex items-center justify-between bg-red-900/30 p-3 rounded">
+                      <span>🌟 Автосбор урожая</span>
+                      <Button size="sm" className="bg-red-600 hover:bg-red-700">1000💰</Button>
+                    </li>
+                  </ul>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
