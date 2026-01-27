@@ -294,9 +294,9 @@ export default function EarningGroupsTabs() {
                   
                   <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-12">
                     <img 
-                      src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/b2d8c120-e678-4d31-b5ec-8eac4cb843ec.png"
+                      src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/2236eb45-e301-4eb6-a505-9777badd12b1.png"
                       alt="Character"
-                      className="h-96 w-auto drop-shadow-2xl object-fill rounded-lg"
+                      className="h-96 w-auto drop-shadow-2xl object-contain"
                     />
                   </div>
                   
@@ -371,9 +371,9 @@ export default function EarningGroupsTabs() {
                             >
                               {isPlayer && (
                                 <img 
-                                  src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/b2d8c120-e678-4d31-b5ec-8eac4cb843ec.png"
+                                  src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/2236eb45-e301-4eb6-a505-9777badd12b1.png"
                                   alt="Player"
-                                  className="w-10 h-10 object-cover"
+                                  className="w-10 h-10 object-contain"
                                 />
                               )}
                             </div>
