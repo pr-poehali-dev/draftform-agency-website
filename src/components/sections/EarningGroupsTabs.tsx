@@ -10,33 +10,6 @@ export default function EarningGroupsTabs() {
   const { toast } = useToast();
   const [gameStarted, setGameStarted] = useState(false);
   const [playerPos, setPlayerPos] = useState({ x: 5, y: 5 });
-  const [showEmotionMenu, setShowEmotionMenu] = useState(false);
-  const [selectedEmotion, setSelectedEmotion] = useState('smile');
-  const [showEmotionBubble, setShowEmotionBubble] = useState(false);
-  
-  const emotions = [
-    { icon: '😊', id: 'smile' },
-    { icon: '😂', id: 'laugh' },
-    { icon: '😎', id: 'cool' },
-    { icon: '🤔', id: 'think' },
-    { icon: '😍', id: 'love' },
-    { icon: '🔥', id: 'fire' },
-    { icon: '💪', id: 'strong' },
-    { icon: '🎮', id: 'game' },
-    { icon: '⭐', id: 'star' },
-    { icon: '✨', id: 'sparkle' },
-    { icon: '🚀', id: 'rocket' },
-    { icon: '💯', id: 'hundred' }
-  ];
-  
-  const handleEmotionClick = (emotionId: string) => {
-    setSelectedEmotion(emotionId);
-    setShowEmotionMenu(false);
-    setShowEmotionBubble(true);
-    setTimeout(() => setShowEmotionBubble(false), 3000);
-    const emotion = emotions.find(e => e.id === emotionId);
-    toast({ title: `${emotion?.icon || ''} Эмоция выбрана!` });
-  };
 
   const startGame = () => {
     setGameStarted(true);
@@ -319,42 +292,12 @@ export default function EarningGroupsTabs() {
                   
                   <div className="absolute inset-0 bg-black/20"></div>
                   
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <div className="relative animate-character-dance">
-                      <img 
-                        src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/75d7be62-b6ee-4507-8bf8-714c9dfb7975.png"
-                        alt="Character"
-                        className="h-64 w-auto drop-shadow-2xl object-contain cursor-pointer"
-                        onClick={() => setShowEmotionMenu(!showEmotionMenu)}
-                      />
-                      
-                      {showEmotionBubble && (
-                        <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 animate-emoji-float">
-                          <div className="bg-white rounded-full px-4 py-3 shadow-xl border-4 border-accent text-4xl">
-                            {emotions.find(e => e.id === selectedEmotion)?.icon || '😊'}
-                          </div>
-                        </div>
-                      )}
-                      
-                      {showEmotionMenu && (
-                        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 -translate-y-full">
-                          <div className="bg-white rounded-2xl p-4 shadow-2xl border-4 border-accent">
-                            <h4 className="text-sm font-bold text-accent mb-2 text-center">ВЫБЕРИ ЭМОЦИЮ</h4>
-                            <div className="grid grid-cols-4 gap-2">
-                              {emotions.map((emotion) => (
-                                <button
-                                  key={emotion.id}
-                                  onClick={() => handleEmotionClick(emotion.id)}
-                                  className="w-12 h-12 text-2xl hover:scale-125 transition-transform bg-accent/10 rounded-lg hover:bg-accent/20"
-                                >
-                                  {emotion.icon}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-character-dance">
+                    <img 
+                      src="https://cdn.poehali.dev/projects/e110bdf8-428a-48b0-943e-28d07f28548f/bucket/75d7be62-b6ee-4507-8bf8-714c9dfb7975.png"
+                      alt="Character"
+                      className="h-64 w-auto drop-shadow-2xl object-contain"
+                    />
                   </div>
                   
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-4 border-2 border-accent">
